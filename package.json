@@ -1,22 +1,14 @@
 {
-  "name": "electron-quick-start",
+  "name": "gchelper",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
-  "main": "main.js",
+  "description": "Helper to solve GC mysteries",
+  "repository": "gchelper",
+  "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron app.js"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "license": "ISC",
   "devDependencies": {
-    "electron": "^2.0.0"
+    "electron": "^1.4.12"
   }
 }
