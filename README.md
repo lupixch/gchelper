@@ -1,7 +1,7 @@
 # Hash
 
-Simple [Electron](http://electron.atom.io) application that shows the hash
-values of entered text using different algorithms.
+Simple [Electron](http://electron.atom.io) application that helps to
+solve GV puzzles by offering decoding help for some algorithms.
 
 ![screenshot](https://cloud.githubusercontent.com/assets/671378/21204178/de96fa12-c20a-11e6-8e94-f5b16e676eee.png)
 
@@ -9,7 +9,7 @@ values of entered text using different algorithms.
 
 - Install [Node LTS](https://nodejs.org)
 - Clone this repository
-- `cd hash`
+- `cd gchelper`
 - `npm install` to install the application's dependencies
 - `npm start` to start the application
 
