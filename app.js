@@ -32,4 +32,6 @@ app.once('ready', () => {
   window.once('ready-to-show', () => {
     window.show()
   })
+
+  window.webContents.openDevTools();
 })
