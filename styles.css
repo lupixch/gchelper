@@ -6,14 +6,15 @@ html, body, .container-fluid {
   font-size: 16px;
 }
 
-.hash-output {
+.std-output {
   color: #575B5E;
   font-size: 16px;
   letter-spacing: 2px;
   white-space: pre-wrap;
 }
 
-.hash-heading {
+.std-heading {
   color: #575B5E;
+  font-size: 120%;
   font-weight: normal;
 }

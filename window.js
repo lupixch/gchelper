@@ -13,7 +13,7 @@ $(() => {
 
     const sha1 = crypto.createHash('sha1').update(text, 'utf8').digest('hex')
     $('#sha1-output').text(sha1)
-z
+
     const sha256 = crypto.createHash('sha256').update(text, 'utf8').digest('hex')
     $('#sha256-output').text(sha256)
 
