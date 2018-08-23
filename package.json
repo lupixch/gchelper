@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Helper to solve GC mysteries",
   "repository": "gchelper",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron app.js"
   },
