@@ -1,9 +1,9 @@
-# Hash
+# GcHelper
 
 Simple [Electron](http://electron.atom.io) application that helps to
 solve GV puzzles by offering decoding help for some algorithms.
 
-![screenshot](https://cloud.githubusercontent.com/assets/671378/21204178/de96fa12-c20a-11e6-8e94-f5b16e676eee.png)
+![screenshot](./assets/gchelper-screenshot.jpg)
 
 ## Getting started
 
@@ -13,11 +13,10 @@ solve GV puzzles by offering decoding help for some algorithms.
 - `npm install` to install the application's dependencies
 - `npm start` to start the application
 
-## Going further
+## Functionality
 
-Here are some ideas on how it can be improved using other Electron APIs.
+### ROT encoding
+Show all 26 ROT encodings of an input text. 
 
-- Make headings links that open to Wikipedia page for algorithm.
-- Support dragging/dropping a file to hash onto the window.
-- Support opening a file via a dialog to hash from the app's menu.
-- Display time taken to compute each hash.
+### Hashes
+Display several hashes for an input text.
