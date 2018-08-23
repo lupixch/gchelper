@@ -16,5 +16,5 @@ html, body, .container-fluid {
 .std-heading {
   color: #575B5E;
   font-size: 120%;
-  font-weight: normal;
+  font-weight: bold;
 }

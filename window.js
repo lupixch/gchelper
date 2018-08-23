@@ -1,15 +1,18 @@
 $(() => {
   const crypto = require('crypto')
-  const rot = require('rot')
+  const rotx = require('rot')
   
   $('#text-input').bind('input propertychange', function() {
     const text = this.value
 
-    let out = "";
+    let rot = "";
     for (let j = 1; j <= 26; j++) {
-      out = out + j + ' ' + rot(text, j) + '\n';
+      rot = rot + j + ' ' + rotx(text, j) + '\n';
     }
-    $('#rot-output').text(out);
+    $('#rot-output').text(rot);
+
+    const md5 = crypto.createHash('md5').update(text, 'utf8').digest('hex')
+    $('#md5-output').text(md5)
 
     const sha1 = crypto.createHash('sha1').update(text, 'utf8').digest('hex')
     $('#sha1-output').text(sha1)
