@@ -33,5 +33,5 @@ app.once('ready', () => {
     window.show()
   })
 
-  window.webContents.openDevTools();
+  //window.webContents.openDevTools();
 })

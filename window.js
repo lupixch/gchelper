@@ -1,7 +1,7 @@
 $(() => {
   const crypto = require('crypto')
   const rot = require('rot')
-
+  
   $('#text-input').bind('input propertychange', function() {
     const text = this.value
 
