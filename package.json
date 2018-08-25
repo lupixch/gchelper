@@ -5,7 +5,7 @@
   "repository": "gchelper",
   "main": "main.js",
   "scripts": {
-    "start": "electron app.js"
+    "start": "electron main.js"
   },
   "license": "ISC",
   "devDependencies": {
