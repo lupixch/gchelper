@@ -1,6 +1,7 @@
 $(() => {
   const crypto = require('crypto')
   const rotx = require('rot')
+  const wv = require('./lib/word-value.js');
   
   $('#text-input').bind('input propertychange', function() {
     const text = this.value
@@ -22,7 +23,27 @@ $(() => {
 
     const sha512 = crypto.createHash('sha512').update(text, 'utf8').digest('hex')
     $('#sha512-output').text(sha512)
+
+    let words = this.value.split(" ");
+    let values = "";
+    let sum = 0;
+    const padVal = 20;
+    for (var i = 0; i < words.length; i += 1) {
+      let word = words[i];
+      if ( word.length > 0)
+      {
+        let val = wv.wordValue(word);
+        let valRed = wv.reducedSum(val);
+        sum += val;
+        values = values + words[i].padEnd(padVal) + ': ' + val + ' (' + valRed + ')\n';  
+      }
+    }
+    values += '-'.repeat(2*padVal) + '\n';  
+    values += 'Summe'.padEnd(padVal) + ': ' + sum +  ' (' + wv.reducedSum(sum) + ')\n';  
+    $('#word-output').text(values);
   })
+
+
 
   $('#text-input').focus() // focus input box
 })
