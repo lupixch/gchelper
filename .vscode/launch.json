@@ -29,7 +29,7 @@
             "name": "Electron: All",
             "configurations": [
                 "Electron: Main",
-                "Electron: Renderer"
+                "Electron: Renderer",
             ]
         }
     ]
