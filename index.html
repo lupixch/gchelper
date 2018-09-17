@@ -45,7 +45,10 @@
         <a class="nav-link" id="hash-tab" data-toggle="tab" href="#hash" role="tab" aria-controls="hash" aria-selected="false">Hashes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="word-tab" data-toggle="tab" href="#misc" role="tab" aria-controls="misc" aria-selected="false">Wortwert</a>
+        <a class="nav-link" id="word-tab" data-toggle="tab" href="#word" role="tab" aria-controls="word" aria-selected="false">Word value</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64" role="tab" aria-controls="base64" aria-selected="false">base64</a>
       </li>
     </ul>
     <p></p>
@@ -100,18 +103,35 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="misc" role="tabpanel" aria-labelledby="word-tab">
+
+      <div class="tab-pane fade" id="word" role="tabpanel" aria-labelledby="word-tab">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h4 class="std-heading">Wortwerte</h4>
+            <h4 class="std-heading">Word value</h4>
             <pre id="word-output" class="std-output"> </pre>
           </div>
         </div>
       </div>
-      </div>
-    </div>
 
-    <div id="container1" class="container-fluid">
+      <div class="tab-pane fade" id="base64" role="tabpanel" aria-labelledby="base-tab">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4 class="std-heading">To base64</h4>
+            <pre id="tobase64-output" class="std-output"> </pre>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h4 class="std-heading">From base64</h4>
+            <pre id="frombase64-output" class="std-output"> </pre>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+  <div id="container1" class="container-fluid">
 
       <!-- Input row 
     <div class="row">

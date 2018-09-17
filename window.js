@@ -24,6 +24,11 @@ $(() => {
     const sha512 = crypto.createHash('sha512').update(text, 'utf8').digest('hex')
     $('#sha512-output').text(sha512)
 
+    const toBase64 = Buffer.from(text).toString('base64');
+    $('#tobase64-output').text(toBase64)
+    const fromBase64 = Buffer.from(text, 'base64').toString('ascii');
+    $('#frombase64-output').text(fromBase64)
+
     let words = this.value.split(" ");
     let values = "";
     let sum = 0;
