@@ -5,8 +5,7 @@
   "repository": "gchelper",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js",
-    "mark": "git log -1 --format=%cd --  main.js window.js index.html styles.css > commitdate.txt"
+    "start": "electron main.js"
   },
   "license": "ISC",
   "devDependencies": {
