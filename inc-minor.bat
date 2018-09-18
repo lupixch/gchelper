@@ -1,1 +1,1 @@
-npm version patch
+npm version minor
