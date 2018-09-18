@@ -5,14 +5,8 @@ const fs = require('fs');
 
 require('electron-reload')(__dirname);
 
-let getAppVersionDateString = function() {
-  let versionDate = '';
-  try {
-    versionDate = fs.readFileSync('commitdate.txt', 'utf8');
-  } catch (error) {
-    versionDate = 'unknown'
-  }
-  return ' - Version ' + versionDate;
+let getAppVersionString = function() {
+   return app.getVersion();
 }
 
 let window = null
@@ -41,7 +35,7 @@ app.once('ready', () => {
 
   // Show window when page is ready
   window.once('ready-to-show', () => {
-    window.setTitle('GC Helper' + getAppVersionDateString());
+    window.setTitle('GC Helper V' + getAppVersionString());
     window.show()
   })
 
