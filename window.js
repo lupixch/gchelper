@@ -1,10 +1,19 @@
+
 $(() => {
   const crypto = require('crypto')
   const rotx = require('rot')
   const wv = require('./lib/word-value.js');
+  const cy = require('cipherjs');
+
   
   $('#text-input').bind('input propertychange', function() {
     const text = this.value
+
+    /*
+    const Vigenere = cy.Vigenere;
+    let v = Vigenere.encrypt('MY SECRET MESSAGE', 'MY SECRET KEY')
+    console.log(v);
+    */
 
     let rot = "";
     for (let j = 1; j <= 26; j++) {
