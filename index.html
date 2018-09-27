@@ -2,138 +2,134 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>GC Helper</title>
+    <title>GC Helper</title>
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-  <link rel="Stylesheet" href="styles.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="Stylesheet" href="styles.css">
 
-  <!-- Scripts -->
-  <script>
-    delete module.exports
-  </script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-  <script src="./window.js" charset="utf-8"></script>
+    <!-- Scripts -->
+    <script>
+        delete module.exports
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./renderer.js" charset="utf-8"></script>
 </head>
 
 <body>
-  <div id="container" class="container-fluid">
+    <div id="container" class="container-fluid">
 
-    <p></p>
-    <!-- Input row -->
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3 class="std-heading">Input</h3>
-        <textarea rows="2" id="text-input" class="form-control text-input" placeholder="Enter text..."></textarea>
-      </div>
+        <p></p>
+        <!-- Input row -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h3 class="std-heading">Input</h3>
+                <textarea rows="2" id="text-input" class="form-control text-input" placeholder="Enter text..."></textarea>
+            </div>
+        </div>
+        <p></p>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="rot-tab" data-toggle="tab" href="#rot" role="tab" aria-controls="rot" aria-selected="true">ROT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="hash-tab" data-toggle="tab" href="#hash" role="tab" aria-controls="hash" aria-selected="false">Hashes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="word-tab" data-toggle="tab" href="#word" role="tab" aria-controls="word" aria-selected="false">Word value</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64" role="tab" aria-controls="base64" aria-selected="false">base64</a>
+            </li>
+        </ul>
+        <p></p>
+
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="rot" role="tabpanel" aria-labelledby="rot-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">ROT 1-26</h4>
+                        <pre id="rot-output" class="std-output"> </pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="hash" role="tabpanel" aria-labelledby="hash-tab">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <!-- MD5-1 row -->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="std-heading">MD5</h4>
+                                <pre id="md5-output" class="std-output"> </pre>
+                            </div>
+                        </div>
+
+                        <!-- SHA-1 row -->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="std-heading">SHA-1</h4>
+                                <pre id="sha1-output" class="std-output"> </pre>
+                            </div>
+                        </div>
+
+                        <!-- SHA-256 row -->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="std-heading">SHA-256</h4>
+                                <pre id="sha256-output" class="std-output"> </pre>
+                            </div>
+                        </div>
+
+                        <!-- SHA-512 row -->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4 class="std-heading">SHA-512</h4>
+                                <pre id="sha512-output" class="std-output"> </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="word" role="tabpanel" aria-labelledby="word-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">Word value</h4>
+                        <pre id="word-output" class="std-output"> </pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="base64" role="tabpanel" aria-labelledby="base-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">To base64</h4>
+                        <pre id="tobase64-output" class="std-output"> </pre>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">From base64</h4>
+                        <pre id="frombase64-output" class="std-output"> </pre>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <p></p>
 
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="rot-tab" data-toggle="tab" href="#rot" role="tab" aria-controls="rot" aria-selected="true">ROT</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="hash-tab" data-toggle="tab" href="#hash" role="tab" aria-controls="hash" aria-selected="false">Hashes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="word-tab" data-toggle="tab" href="#word" role="tab" aria-controls="word" aria-selected="false">Word value</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64" role="tab" aria-controls="base64" aria-selected="false">base64</a>
-      </li>
-    </ul>
-    <p></p>
+    <div id="container1" class="container-fluid">
 
-    <div class="tab-content" id="myTabContent">
-
-      <div class="tab-pane fade show active" id="rot" role="tabpanel" aria-labelledby="rot-tab">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h4 class="std-heading">ROT 1-26</h4>
-            <pre id="rot-output" class="std-output"> </pre>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="hash" role="tabpanel" aria-labelledby="hash-tab">
-        <div class="row">
-
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-            <!-- MD5-1 row -->
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4 class="std-heading">MD5</h4>
-                <pre id="md5-output" class="std-output"> </pre>
-              </div>
-            </div>
-
-            <!-- SHA-1 row -->
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4 class="std-heading">SHA-1</h4>
-                <pre id="sha1-output" class="std-output"> </pre>
-              </div>
-            </div>
-
-            <!-- SHA-256 row -->
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4 class="std-heading">SHA-256</h4>
-                <pre id="sha256-output" class="std-output"> </pre>
-              </div>
-            </div>
-
-            <!-- SHA-512 row -->
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4 class="std-heading">SHA-512</h4>
-                <pre id="sha512-output" class="std-output"> </pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="word" role="tabpanel" aria-labelledby="word-tab">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h4 class="std-heading">Word value</h4>
-            <pre id="word-output" class="std-output"> </pre>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane fade" id="base64" role="tabpanel" aria-labelledby="base-tab">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h4 class="std-heading">To base64</h4>
-            <pre id="tobase64-output" class="std-output"> </pre>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h4 class="std-heading">From base64</h4>
-            <pre id="frombase64-output" class="std-output"> </pre>
-          </div>
-        </div>
-      </div>
-  
-    </div>
-  </div>
-
-  <div id="container1" class="container-fluid">
-
-      <!-- Input row 
+        <!-- Input row 
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
         <h3 class="std-heading">Input</h3>
@@ -141,9 +137,6 @@
       </div>
     </div>
     -->
-
-
-
     </div>
 </body>
 

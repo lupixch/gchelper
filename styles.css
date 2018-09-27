@@ -1,20 +1,22 @@
-html, body, .container-fluid {
-  background-color: #D6D8DC;
+html,
+body,
+.container-fluid {
+    background-color: #D6D8DC;
 }
 
 .text-input {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .std-output {
-  color: #575B5E;
-  font-size: 16px;
-  letter-spacing: 2px;
-  white-space: pre-wrap;
+    color: #575B5E;
+    font-size: 16px;
+    letter-spacing: 2px;
+    white-space: pre-wrap;
 }
 
 .std-heading {
-  color: #575B5E;
-  font-size: 120%;
-  font-weight: bold;
+    color: #575B5E;
+    font-size: 120%;
+    font-weight: bold;
 }
