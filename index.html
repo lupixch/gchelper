@@ -46,11 +46,15 @@
             <li class="nav-item">
                 <a class="nav-link" id="base64-tab" data-toggle="tab" href="#base64" role="tab" aria-controls="base64" aria-selected="false">base64</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="keydecode-tab" data-toggle="tab" href="#keydecode" role="tab" aria-controls="keydecode" aria-selected="false">Keydecode</a>
+            </li>
         </ul>
         <p></p>
 
         <div class="tab-content" id="myTabContent">
 
+            <!-- ROT 1 ... 26 -->
             <div class="tab-pane fade show active" id="rot" role="tabpanel" aria-labelledby="rot-tab">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -60,6 +64,7 @@
                 </div>
             </div>
 
+            <!-- different hash values -->
             <div class="tab-pane fade" id="hash" role="tabpanel" aria-labelledby="hash-tab">
                 <div class="row">
 
@@ -100,6 +105,7 @@
                 </div>
             </div>
 
+            <!-- Word values -->
             <div class="tab-pane fade" id="word" role="tabpanel" aria-labelledby="word-tab">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -109,6 +115,7 @@
                 </div>
             </div>
 
+            <!-- base64 encodings -->
             <div class="tab-pane fade" id="base64" role="tabpanel" aria-labelledby="base-tab">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -124,6 +131,21 @@
                 </div>
             </div>
 
+            <!-- Misc decodings with a key -->
+            <div class="tab-pane fade" id="keydecode" role="tabpanel" aria-labelledby="keydecode-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">Key</h4>
+                        <textarea rows="1" id="key-input" class="form-control text-input" placeholder="Enter key..."></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">From Vigenere</h4>
+                        <pre id="fromvigenere-output" class="std-output"> </pre>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

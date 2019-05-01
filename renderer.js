@@ -4,37 +4,45 @@ $(() => {
     const wv = require('./lib/word-value.js');
     const cy = require('cipherjs');
 
+    let vigenereKey = "";
+    let inputText = "";
+
+    $('#key-input').bind('input propertychange', function() {
+        vigenereKey = this.value;
+
+        const Vigenere = cy.Vigenere;
+        let v = Vigenere.decrypt(inputText, vigenereKey)
+        $('#fromvigenere-output').text(v)
+    });
 
     $('#text-input').bind('input propertychange', function() {
-        const text = this.value
+        inputText = this.value
 
-        /*
         const Vigenere = cy.Vigenere;
-        let v = Vigenere.encrypt('MY SECRET MESSAGE', 'MY SECRET KEY')
-        console.log(v);
-        */
+        let v = Vigenere.decrypt(inputText, vigenereKey)
+        $('#fromvigenere-output').text(v)
 
         let rot = "";
         for (let j = 1; j <= 26; j++) {
-            rot = rot + j + ' ' + rotx(text, j) + '\n';
+            rot = rot + j + ' ' + rotx(inputText, j) + '\n';
         }
         $('#rot-output').text(rot);
 
-        const md5 = crypto.createHash('md5').update(text, 'utf8').digest('hex')
+        const md5 = crypto.createHash('md5').update(inputText, 'utf8').digest('hex')
         $('#md5-output').text(md5)
 
-        const sha1 = crypto.createHash('sha1').update(text, 'utf8').digest('hex')
+        const sha1 = crypto.createHash('sha1').update(inputText, 'utf8').digest('hex')
         $('#sha1-output').text(sha1)
 
-        const sha256 = crypto.createHash('sha256').update(text, 'utf8').digest('hex')
+        const sha256 = crypto.createHash('sha256').update(inputText, 'utf8').digest('hex')
         $('#sha256-output').text(sha256)
 
-        const sha512 = crypto.createHash('sha512').update(text, 'utf8').digest('hex')
+        const sha512 = crypto.createHash('sha512').update(inputText, 'utf8').digest('hex')
         $('#sha512-output').text(sha512)
 
-        const toBase64 = Buffer.from(text).toString('base64');
+        const toBase64 = Buffer.from(inputText).toString('base64');
         $('#tobase64-output').text(toBase64)
-        const fromBase64 = Buffer.from(text, 'base64').toString('ascii');
+        const fromBase64 = Buffer.from(inputText, 'base64').toString('ascii');
         $('#frombase64-output').text(fromBase64)
 
         let words = this.value.split(" ");
