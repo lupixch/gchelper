@@ -1,15 +1,15 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
-const url = require('url')
-const fs = require('fs')
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const url = require('url');
+const fs = require('fs');
 
-require('electron-reload')(__dirname)
+require('electron-reload')(__dirname);
 
 let getAppVersionString = function() {
-    return app.getVersion()
+    return app.getVersion();
 }
 
-let window = null
+let window = null;
 
 // Wait until the app is ready
 app.once('ready', () => {
@@ -27,20 +27,20 @@ app.once('ready', () => {
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    });
 
     // Load a URL in the window to the local index.html path
     window.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
-    }))
+    }));
 
     // Show window when page is ready
     window.once('ready-to-show', () => {
-        window.setTitle('GC Helper V' + getAppVersionString())
-        window.show()
-    })
+        window.setTitle('GC Helper V' + getAppVersionString());
+        window.show();
+    });
 
     // window.webContents.openDevTools()
-})
+});
