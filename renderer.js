@@ -11,16 +11,22 @@ $(() => {
         vigenereKey = this.value;
 
         const Vigenere = cy.Vigenere;
-        let v = Vigenere.decrypt(inputText, vigenereKey);
-        $('#fromvigenere-output').text(v);
+        let vdec = Vigenere.decrypt(inputText, vigenereKey);
+        $('#vigenereDecript-output').text(vdec);
+
+        let venc = Vigenere.encrypt(inputText, vigenereKey);
+        $('#vigenereEncript-output').text(venc);
     });
 
     $('#text-input').bind('input propertychange', function() {
         inputText = this.value;
 
         const Vigenere = cy.Vigenere;
-        let v = Vigenere.decrypt(inputText, vigenereKey);
-        $('#fromvigenere-output').text(v);
+        let vdec = Vigenere.decrypt(inputText, vigenereKey);
+        $('#vigenereDecript-output').text(vdec);
+
+        let venc = Vigenere.encrypt(inputText, vigenereKey);
+        $('#vigenereEncript-output').text(venc);
 
         let rot = "";
         for (let j = 1; j <= 26; j++) {
