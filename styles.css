@@ -20,3 +20,7 @@ body,
     font-size: 120%;
     font-weight: bold;
 }
+
+#key-input {
+    margin-bottom: 30px;
+}

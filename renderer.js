@@ -4,29 +4,43 @@ $(() => {
     const wv = require('./lib/word-value.js');
     const cy = require('cipherjs');
 
-    let vigenereKey = "";
+    let key = "";
     let inputText = "";
 
     $('#key-input').bind('input propertychange', function() {
-        vigenereKey = this.value;
+        key = this.value;
 
         const Vigenere = cy.Vigenere;
-        let vdec = Vigenere.decrypt(inputText, vigenereKey);
+        let vdec = Vigenere.decrypt(inputText, key);
         $('#vigenereDecript-output').text(vdec);
 
-        let venc = Vigenere.encrypt(inputText, vigenereKey);
+        let venc = Vigenere.encrypt(inputText, key);
         $('#vigenereEncript-output').text(venc);
+
+        const Substitution = cy.Substitution;
+        let sdec = Substitution.decrypt(inputText, key);
+        $('#substitutionDecript-output').text(sdec);
+
+        let senc = Substitution.encrypt(inputText, key);
+        $('#substitutionEncript-output').text(senc);
     });
 
     $('#text-input').bind('input propertychange', function() {
-        inputText = this.value;
+        inputText = this.value.toUpperCase();
 
         const Vigenere = cy.Vigenere;
-        let vdec = Vigenere.decrypt(inputText, vigenereKey);
+        let vdec = Vigenere.decrypt(inputText, key);
         $('#vigenereDecript-output').text(vdec);
 
-        let venc = Vigenere.encrypt(inputText, vigenereKey);
+        let venc = Vigenere.encrypt(inputText, key);
         $('#vigenereEncript-output').text(venc);
+
+        const Substitution = cy.Substitution;
+        let sdec = Substitution.decrypt(inputText, key);
+        $('#substitutionDecript-output').text(sdec);
+
+        let senc = Substitution.encrypt(inputText, key);
+        $('#substitutionEncript-output').text(senc);
 
         let rot = "";
         for (let j = 1; j <= 26; j++) {
