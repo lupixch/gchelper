@@ -7,6 +7,15 @@ $(() => {
     let key = "";
     let inputText = "";
 
+    $('#btnTobase64').click(function() {
+        let txt = $('#tobase64-output').text();
+        $('#text-input').val(txt).trigger('propertychange');
+    });
+    $('#btnFrombase64').click(function() {
+        let txt = $('#frombase64-output').text();
+        $('#text-input').val(txt).trigger('propertychange');
+    });
+
     $('#key-input').bind('input propertychange', function() {
         key = this.value;
 

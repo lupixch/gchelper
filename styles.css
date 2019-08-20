@@ -24,3 +24,9 @@ body,
 #key-input {
     margin-bottom: 30px;
 }
+
+.btn-to-inp {
+    margin-left: 10px;
+    border: 0;
+    background: #aaa;
+}
