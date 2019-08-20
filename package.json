@@ -1,6 +1,6 @@
 {
   "name": "gchelper",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Helper to solve GC mysteries",
   "repository": "gchelper",
   "main": "main.js",
