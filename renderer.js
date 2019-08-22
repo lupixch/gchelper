@@ -3,9 +3,13 @@ $(() => {
     const rotx = require('rot');
     const wv = require('./lib/word-value.js');
     const cy = require('cipherjs');
+    const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
+    const ddd_dmm = require('./lib/ddd-dmm.js');
 
     let key = "";
     let inputText = "";
+    let wgs84String = "";
+    let swissgridString = "";
 
     $('#btnTobase64').click(function() {
         let txt = $('#tobase64-output').text();
@@ -14,6 +18,26 @@ $(() => {
     $('#btnFrombase64').click(function() {
         let txt = $('#frombase64-output').text();
         $('#text-input').val(txt).trigger('propertychange');
+    });
+
+    $('#wgs2swiss-output').bind('input propertychange', function() {
+        swissgridString = this.value;
+        let swissArray = swissgridString.split(' ');
+        let y = parseInt(swissArray[0]);
+        let x = parseInt(swissArray[1]);
+        let lat = swisstopo.CHtoWGSlat(y, x);
+        let lon = swisstopo.CHtoWGSlng(y, x);
+        $('#swiss2wgs-output').val(ddd_dmm.ddd2dmm(lat) + ' ' + ddd_dmm.ddd2dmm(lon));
+    });
+
+    $('#swiss2wgs-output').bind('input propertychange', function() {
+        wgs84String = this.value;
+        let wgsArray = wgs84String.split(' ');
+        let lat = ddd_dmm.dmm2ddd(wgsArray[0] + ' ' + wgsArray[1]);
+        let lon = ddd_dmm.dmm2ddd(wgsArray[2] + ' ' + wgsArray[3]);
+        let x = swisstopo.WGStoCHx(lat, lon);
+        let y = swisstopo.WGStoCHy(lat, lon);
+        $('#wgs2swiss-output').val(Math.round(y) + ' ' + Math.round(x));
     });
 
     $('#key-input').bind('input propertychange', function() {

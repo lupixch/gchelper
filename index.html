@@ -49,6 +49,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="keydecode-tab" data-toggle="tab" href="#keydecode" role="tab" aria-controls="keydecode" aria-selected="false">Keydecode</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="swisswgs-tab" data-toggle="tab" href="#swisswgs" role="tab" aria-controls="swisswgs" aria-selected="false">Swissgrid/WGS</a>
+            </li>
         </ul>
         <p></p>
 
@@ -166,6 +169,27 @@
                     </div>
                 </div>
             </div>
+
+            <!-- wgs84 / swissgrid -->
+            <div class="tab-pane fade" id="swisswgs" role="tabpanel" aria-labelledby="base-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">To Swissgrid</h4>
+                        <textarea rows="1" id="wgs2swiss-output" class="form-control text-input" placeholder="Swissgrid"></textarea>
+                        <!-- <button class="btn-to-inp" id="btnTobase64">&nbsp;&rarr;inp</button> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="std-heading">To WGS84</h4>
+                        <textarea rows="1" id="swiss2wgs-output" class="form-control text-input" placeholder="WGS84"></textarea>
+                        <!-- <button class="btn-to-inp" id="btnFrombase64">&nbsp;&rarr;inp</button> -->
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 

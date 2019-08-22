@@ -9,12 +9,13 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "electron": "^5.0.6",
-    "electron-rebuild": "^1.8.5"
+    "electron": "^5.0.10",
+    "electron-rebuild": "^1.8.6"
   },
   "dependencies": {
     "cipherjs": "^0.1.1",
-    "electron-reload": "^1.4.0",
+    "electron-reload": "^1.5.0",
+    "geolib": "^3.0.4",
     "rot": "^0.1.0"
   }
 }
