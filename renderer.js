@@ -5,6 +5,12 @@ $(() => {
     const cy = require('cipherjs');
     const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
     const ddd_dmm = require('./lib/ddd-dmm.js');
+    const fcoord = require('formatcoords');
+    const fcOptions = {
+        latLonSeparator : '   ' ,
+        decimalPlaces: 3
+    };
+    const cparse = require('coordinate-parser');
 
     let key = "";
     let inputText = "";
@@ -20,24 +26,34 @@ $(() => {
         $('#text-input').val(txt).trigger('propertychange');
     });
 
-    $('#wgs2swiss-output').bind('input propertychange', function() {
+    $('#swissgrid').bind('input propertychange', function() {
         swissgridString = this.value;
-        let swissArray = swissgridString.split(' ');
+        let swissArray = swissgridString.split(/\s+/);
         let y = parseInt(swissArray[0]);
         let x = parseInt(swissArray[1]);
-        let lat = swisstopo.CHtoWGSlat(y, x);
-        let lon = swisstopo.CHtoWGSlng(y, x);
-        $('#swiss2wgs-output').val(ddd_dmm.ddd2dmm(lat) + ' ' + ddd_dmm.ddd2dmm(lon));
+        let coord = swisstopo.CHtoWGS(y, x); 
+        // let lat = swisstopo.CHtoWGSlat(y, x);
+        // let lon = swisstopo.CHtoWGSlng(y, x);
+        let out = fcoord(coord[1],coord[0]).format('XD m', fcOptions);
+        // $('#swiss2wgs-output').val(ddd_dmm.ddd2dmm(lat) + ' ' + ddd_dmm.ddd2dmm(lon));
+        $('#wgs84').val(out);
     });
 
-    $('#swiss2wgs-output').bind('input propertychange', function() {
+    $('#wgs84').bind('input propertychange', function() {
         wgs84String = this.value;
-        let wgsArray = wgs84String.split(' ');
-        let lat = ddd_dmm.dmm2ddd(wgsArray[0] + ' ' + wgsArray[1]);
-        let lon = ddd_dmm.dmm2ddd(wgsArray[2] + ' ' + wgsArray[3]);
-        let x = swisstopo.WGStoCHx(lat, lon);
-        let y = swisstopo.WGStoCHy(lat, lon);
-        $('#wgs2swiss-output').val(Math.round(y) + ' ' + Math.round(x));
+        try {
+            let zzz = new cparse(wgs84String);
+            // let wgsArray = wgs84String.split(' ');
+            // let lat = ddd_dmm.dmm2ddd(wgsArray[0] + ' ' + wgsArray[1]);
+            // let lon = ddd_dmm.dmm2ddd(wgsArray[2] + ' ' + wgsArray[3]);
+            let x = swisstopo.WGStoCHx(zzz.latitude, zzz.longitude);
+            let y = swisstopo.WGStoCHy(zzz.latitude, zzz.longitude);
+            // $('#wgs2swiss-output').val(Math.round(y) + ' ' + Math.round(x));
+            $('#swissgrid').val(Math.round(y) + '  ' + Math.round(x));
+            }
+        catch {
+
+        }
     });
 
     $('#key-input').bind('input propertychange', function() {
