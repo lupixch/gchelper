@@ -4,25 +4,26 @@ $(() => {
     const wv = require('./lib/word-value.js');
     const cy = require('cipherjs');
     const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
-    const ddd_dmm = require('./lib/ddd-dmm.js');
     const fcoord = require('formatcoords');
     const fcOptions = {
-        latLonSeparator : '   ' ,
+        latLonSeparator: '   ',
         decimalPlaces: 3
     };
     const cparse = require('coordinate-parser');
 
     let key = "";
     let inputText = "";
+    let inputTextUpper = "";
     let wgs84String = "";
     let swissgridString = "";
 
     $('#btnTobase64').click(function() {
-        let txt = $('#tobase64-output').text();
+        let txt = $('#base64encode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
     });
+
     $('#btnFrombase64').click(function() {
-        let txt = $('#frombase64-output').text();
+        let txt = $('#base64decode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
     });
 
@@ -31,27 +32,19 @@ $(() => {
         let swissArray = swissgridString.split(/\s+/);
         let y = parseInt(swissArray[0]);
         let x = parseInt(swissArray[1]);
-        let coord = swisstopo.CHtoWGS(y, x); 
-        // let lat = swisstopo.CHtoWGSlat(y, x);
-        // let lon = swisstopo.CHtoWGSlng(y, x);
-        let out = fcoord(coord[1],coord[0]).format('XD m', fcOptions);
-        // $('#swiss2wgs-output').val(ddd_dmm.ddd2dmm(lat) + ' ' + ddd_dmm.ddd2dmm(lon));
+        let wgs = swisstopo.CHtoWGS(y, x);
+        let out = fcoord(wgs[1], wgs[0]).format('XD m', fcOptions);
         $('#wgs84').val(out);
     });
 
     $('#wgs84').bind('input propertychange', function() {
         wgs84String = this.value;
         try {
-            let zzz = new cparse(wgs84String);
-            // let wgsArray = wgs84String.split(' ');
-            // let lat = ddd_dmm.dmm2ddd(wgsArray[0] + ' ' + wgsArray[1]);
-            // let lon = ddd_dmm.dmm2ddd(wgsArray[2] + ' ' + wgsArray[3]);
-            let x = swisstopo.WGStoCHx(zzz.latitude, zzz.longitude);
-            let y = swisstopo.WGStoCHy(zzz.latitude, zzz.longitude);
-            // $('#wgs2swiss-output').val(Math.round(y) + ' ' + Math.round(x));
+            let wgs = new cparse(wgs84String);
+            let x = swisstopo.WGStoCHx(wgs.latitude, wgs.longitude);
+            let y = swisstopo.WGStoCHy(wgs.latitude, wgs.longitude);
             $('#swissgrid').val(Math.round(y) + '  ' + Math.round(x));
-            }
-        catch {
+        } catch {
 
         }
     });
@@ -75,20 +68,21 @@ $(() => {
     });
 
     $('#text-input').bind('input propertychange', function() {
-        inputText = this.value.toUpperCase();
+        inputText = this.value;
+        inputTextUpper = inputText.toUpperCase();
 
         const Vigenere = cy.Vigenere;
-        let vdec = Vigenere.decrypt(inputText, key);
+        let vdec = Vigenere.decrypt(inputTextUpper, key);
         $('#vigenereDecript-output').text(vdec);
 
-        let venc = Vigenere.encrypt(inputText, key);
+        let venc = Vigenere.encrypt(inputTextUpper, key);
         $('#vigenereEncript-output').text(venc);
 
         const Substitution = cy.Substitution;
-        let sdec = Substitution.decrypt(inputText, key);
+        let sdec = Substitution.decrypt(inputTextUpper, key);
         $('#substitutionDecript-output').text(sdec);
 
-        let senc = Substitution.encrypt(inputText, key);
+        let senc = Substitution.encrypt(inputTextUpper, key);
         $('#substitutionEncript-output').text(senc);
 
         let rot = "";
@@ -109,10 +103,10 @@ $(() => {
         const sha512 = crypto.createHash('sha512').update(inputText, 'utf8').digest('hex');
         $('#sha512-output').text(sha512);
 
-        const toBase64 = Buffer.from(inputText).toString('base64');
-        $('#tobase64-output').text(toBase64);
-        const fromBase64 = Buffer.from(inputText, 'base64').toString('ascii');
-        $('#frombase64-output').text(fromBase64);
+        const base64encode = Buffer.from(this.value, 'utf8').toString('base64');
+        $('#base64encode-output').text(base64encode);
+        const base64decode = Buffer.from(this.value, 'base64').toString('utf8');
+        $('#base64decode-output').text(base64decode);
 
         let words = this.value.split(" ");
         let values = "";
