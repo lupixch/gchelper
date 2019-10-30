@@ -3,7 +3,29 @@
 Simple [Electron](http://electron.atom.io) application that helps to
 solve GV puzzles by offering decoding help for some algorithms.
 
-![screenshot](./assets/gchelper-screenshot.jpg)
+ROT encodings:
+
+![screenshot](./assets/gchelper-screenshot-1.jpg)
+
+Some hashes:
+
+![screenshot](./assets/gchelper-screenshot-2.jpg)
+
+Word values:
+
+![screenshot](./assets/gchelper-screenshot-3.jpg)
+
+base64 encoding/decoding:
+
+![screenshot](./assets/gchelper-screenshot-4.jpg)
+
+Some encodings/decodings using a key:
+
+![screenshot](./assets/gchelper-screenshot-5.jpg)
+
+Conversion between WGS84 and Swissgrid:
+
+![screenshot](./assets/gchelper-screenshot-6.jpg)
 
 ## Getting started
 
