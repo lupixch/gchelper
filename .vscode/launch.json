@@ -1,6 +1,17 @@
 {
     "version": "0.2.0",
     "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Libtests",
+            "cwd": "${workspaceFolder}/test/libtest/"
+            "program": "${workspaceFolder}/test/libtest/node_modules/grunt/bin/grunt",
+            "args": [
+                // "${workspaceFolder}/test/libtest"
+            ],
+            "internalConsoleOptions": "openOnSessionStart"
+        },
         
         {
             "type": "node",
