@@ -122,7 +122,7 @@ $(() => {
             }
         }
         values += '-'.repeat(2 * padVal) + '\n';
-        values += 'Summe'.padEnd(padVal) + ': ' + sum + ' (' + wv.reducedSum(sum) + ')\n';
+        values += 'Sum'.padEnd(padVal) + ': ' + sum + ' (' + wv.reducedSum(sum) + ')\n';
         $('#word-output').text(values);
     })
 

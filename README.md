@@ -1,31 +1,10 @@
 # GcHelper
 
-Simple [Electron](http://electron.atom.io) application that helps to
-solve GV puzzles by offering decoding help for some algorithms.
+Simple [Electron](https://electron.atom.io) application that helps to
+solve [geocaching](https://www.geocaching.com)  puzzles by offering encoding/decoding and conversion help for some typical used methods.
 
-ROT encodings:
+The application has been developed for own usage. Error handling is moderate...  
 
-![screenshot](./assets/gchelper-screenshot-1.jpg)
-
-Some hashes:
-
-![screenshot](./assets/gchelper-screenshot-2.jpg)
-
-Word values:
-
-![screenshot](./assets/gchelper-screenshot-3.jpg)
-
-base64 encoding/decoding:
-
-![screenshot](./assets/gchelper-screenshot-4.jpg)
-
-Some encodings/decodings using a key:
-
-![screenshot](./assets/gchelper-screenshot-5.jpg)
-
-Conversion between WGS84 and Swissgrid:
-
-![screenshot](./assets/gchelper-screenshot-6.jpg)
 
 ## Getting started
 
@@ -40,5 +19,34 @@ Conversion between WGS84 and Swissgrid:
 ### ROT encoding
 Show all 26 ROT encodings of an input text. 
 
+![screenshot](./assets/gchelper-screenshot-1.jpg)
+
 ### Hashes
 Display several hashes for an input text.
+
+![screenshot](./assets/gchelper-screenshot-2.jpg)
+
+
+### Word values
+Calculate the word values of an input text.
+
+![screenshot](./assets/gchelper-screenshot-3.jpg)
+
+
+### base64 encoding and decoding
+base64 encoding and (possible) decoding of an input text.
+
+![screenshot](./assets/gchelper-screenshot-4.jpg)
+
+
+### Ciphers using a key
+Encoding and decoding of some ciphers with a key.
+
+![screenshot](./assets/gchelper-screenshot-5.jpg)
+
+
+### Conversion WGS84 / Swissgrid
+Convert between WGS84 and Swissgrid coordinates.
+
+![screenshot](./assets/gchelper-screenshot-6.jpg)
+
