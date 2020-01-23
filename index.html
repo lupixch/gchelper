@@ -52,6 +52,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="swisswgs-tab" data-toggle="tab" href="#swisswgs" role="tab" aria-controls="swisswgs" aria-selected="false">Swissgrid/WGS</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="swisswgs-tab" data-toggle="tab" href="#coord" role="tab" aria-controls="coord" aria-selected="false">Coord calcs</a>
+            </li>
         </ul>
         <p></p>
 
@@ -195,6 +198,91 @@
                 </div>
             </div>
 
+            <!-- coord stuff -->
+            <div class="tab-pane fade" id="coord" role="tabpanel" aria-labelledby="base-tab">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <!-- Coord type -->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="typeOptions" id="inlineRadio1" value="option1">
+                            <label class="form-check-label" for="inlineRadio1">WGS84</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="typeOptions" id="inlineRadio2" value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Swissgrid</label>
+                        </div>
+                        <br />
+                        <!-- Coord format -->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="formatOptions" id="inlineRadio1a" value="option1">
+                            <label class="form-check-label" for="inlineRadio1a">d.ddd</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="formatOptions" id="inlineRadio2a" value="option2">
+                            <label class="form-check-label" for="inlineRadio2a">d mm.mmm</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="formatOptions" id="inlineRadio2a" value="option2">
+                            <label class="form-check-label" for="inlineRadio2a">d mm ss</label>
+                        </div>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        P1
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="wgsp1" class="form-control text-input" placeholder="1. Point"></textarea>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Angle
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <textarea rows="1" id="wgs-angle" class="form-control text-input" placeholder="Angle"></textarea>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Distance (m)
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <textarea rows="1" id="wgs-distance" class="form-control text-input" placeholder="Distance"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        P2
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="wgsp1" class="form-control text-input" placeholder="2. Point"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        P3
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="wgsp1" class="form-control text-input" placeholder="3. Point"></textarea>
+                        <!-- <button class="btn-to-inp" id="btnFrombase64">&nbsp;&rarr;inp</button> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        P4
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="wgsp1" class="form-control text-input" placeholder="4. Point"></textarea>
+                        <!-- <button class="btn-to-inp" id="btnFrombase64">&nbsp;&rarr;inp</button> -->
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Cross
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="wgs-distance" class="form-control text-input" placeholder="Crosspoint"></textarea>
+                    </div>
+
+                </div>
+            </div>
 
 
         </div>
