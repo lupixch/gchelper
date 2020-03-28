@@ -5,6 +5,8 @@ $(() => {
     const cy = require('cipherjs');
     const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
     const fcoord = require('formatcoords');
+    const clib = require('./lib/coordlib.js');
+
     const fcOptions = {
         latLonSeparator: '   ',
         decimalPlaces: 3
@@ -16,6 +18,8 @@ $(() => {
     let inputTextUpper = "";
     let wgs84String = "";
     let swissgridString = "";
+    let wgs84p1String = "";
+    let wgs84p2String = "";
 
     $('#btnTobase64').click(function() {
         let txt = $('#base64encode-output').text();
@@ -124,6 +128,36 @@ $(() => {
         values += '-'.repeat(2 * padVal) + '\n';
         values += 'Sum'.padEnd(padVal) + ': ' + sum + ' (' + wv.reducedSum(sum) + ')\n';
         $('#word-output').text(values);
+    })
+
+    $('#wgsp1').bind('input propertychange', function() {
+        wgs84p1String = this.value;
+        try {
+            let wgsP1 = new cparse(wgs84p1String);
+            let wgsP2 = new cparse(wgs84p2String);
+            if (clib.checkPointValid(wgsP1) && clib.checkPointValid(wgsP1)) {
+                let db = clib.distanceAndBearing(wgsP1, wgsP2);
+                $('#wgs-distance').text(db.distance);
+                $('#wgs-angle').text(Math.round(db.bearing));
+            }
+        } catch {
+
+        }
+    })
+
+    $('#wgsp2').bind('input propertychange', function() {
+        wgs84p2String = this.value;
+        try {
+            let wgsP1 = new cparse(wgs84p1String);
+            let wgsP2 = new cparse(wgs84p2String);
+            if (clib.checkPointValid(wgsP1) && clib.checkPointValid(wgsP1)) {
+                let db = clib.distanceAndBearing(wgsP1, wgsP2);
+                $('#wgs-distance').text(db.distance);
+                $('#wgs-angle').text(Math.round(db.bearing));
+            }
+        } catch {
+
+        }
     })
 
     $('#text-input').focus() // focus input box
