@@ -45,7 +45,22 @@ describe('distanceAndBearing()', function() {
 });
 
 describe('projection()', function() {
-    it('should return 0 FAKE', function() {
-        expect(cl.projection(p1, 0, 0)).to.be.an('object');
+    it('with zero distance and angle should return same point', function() {
+        let p = cl.projection(p1, 0, 0); 
+        // console.log(p);
+        // console.log(p1);
+        expect(p.latitude.toFixed(5)).to.equal(p1.latitude.toFixed(5));
+        expect(p.longitude.toFixed(5)).to.equal(p1.longitude.toFixed(5));
+    });
+});
+
+describe('projection()', function() {
+    it('should return correct new point', function() {
+        let p = cl.projection(p1, 13, 34); 
+        // console.log(p1);
+        // console.log(p);
+        // console.log(p2);
+        expect(p.latitude.toFixed(5)).to.equal(p2.latitude.toFixed(5));
+        expect(p.longitude.toFixed(5)).to.equal(p2.longitude.toFixed(5));
     });
 });

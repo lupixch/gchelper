@@ -137,8 +137,8 @@ $(() => {
             let wgsP2 = new cparse(wgs84p2String);
             if (clib.checkPointValid(wgsP1) && clib.checkPointValid(wgsP1)) {
                 let db = clib.distanceAndBearing(wgsP1, wgsP2);
-                $('#wgs-distance').text(db.distance);
-                $('#wgs-angle').text(Math.round(db.bearing));
+                $('#wgs-distance').val(db.distance);
+                $('#wgs-angle').val(Math.round(db.bearing));
             }
         } catch {
 
@@ -152,9 +152,37 @@ $(() => {
             let wgsP2 = new cparse(wgs84p2String);
             if (clib.checkPointValid(wgsP1) && clib.checkPointValid(wgsP1)) {
                 let db = clib.distanceAndBearing(wgsP1, wgsP2);
-                $('#wgs-distance').text(db.distance);
-                $('#wgs-angle').text(Math.round(db.bearing));
+                $('#wgs-distance').val(db.distance);
+                $('#wgs-angle').val(Math.round(db.bearing));
             }
+        } catch {
+
+        }
+    })
+
+    $('#wgs-distance').bind('input propertychange', function() {
+        wgs84p1String = $('#wgsp1').val();
+        let angle = parseInt($('#wgs-angle').val(), 10);
+        let distance = parseInt(this.value, 10);
+        try {
+            let p2 = clib.projection(new cparse(wgs84p1String), distance, angle); 
+            let out = fcoord(p2.latitude, p2.longitude).format('XD m', fcOptions);
+            $('#wgsp2').val(out);
+    
+        } catch {
+
+        }
+    })
+
+    $('#wgs-angle').bind('input propertychange', function() {
+        wgs84p1String = $('#wgsp1').val();
+        let angle = parseInt(this.value, 10);
+        let distance = parseInt($('#wgs-distance').val(), 10);
+        try {
+            let p2 = clib.projection(new cparse(wgs84p1String), distance, angle); 
+            let out = fcoord(p2.latitude, p2.longitude).format('XD m', fcOptions);
+            $('#wgsp2').val(out);
+    
         } catch {
 
         }
