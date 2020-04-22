@@ -6,12 +6,12 @@ $(() => {
     const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
     const fcoord = require('formatcoords');
     const clib = require('./lib/coordlib.js');
+    const cparse = require('coordinate-parser');
 
     const fcOptions = {
         latLonSeparator: '   ',
         decimalPlaces: 3
     };
-    const cparse = require('coordinate-parser');
 
     let key = "";
     let inputText = "";
