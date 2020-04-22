@@ -5,7 +5,7 @@ $(() => {
     const cy = require('cipherjs');
     const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
     const fcoord = require('formatcoords');
-    const clib = require('./lib/coordlib.js');
+    const ccalc = require('./lib/coord-calcs.js');
     const cparse = require('coordinate-parser');
 
     const fcOptions = {
@@ -135,8 +135,8 @@ $(() => {
         try {
             let wgsP1 = new cparse(wgs84p1String);
             let wgsP2 = new cparse(wgs84p2String);
-            if (clib.checkPointValid(wgsP1) && clib.checkPointValid(wgsP1)) {
-                let db = clib.distanceAndBearing(wgsP1, wgsP2);
+            if (ccalc.checkPointValid(wgsP1) && ccalc.checkPointValid(wgsP1)) {
+                let db = ccalc.distanceAndBearing(wgsP1, wgsP2);
                 $('#wgs-distance').val(db.distance);
                 $('#wgs-angle').val(Math.round(db.bearing));
             }
@@ -150,8 +150,8 @@ $(() => {
         try {
             let wgsP1 = new cparse(wgs84p1String);
             let wgsP2 = new cparse(wgs84p2String);
-            if (clib.checkPointValid(wgsP1) && clib.checkPointValid(wgsP1)) {
-                let db = clib.distanceAndBearing(wgsP1, wgsP2);
+            if (ccalc.checkPointValid(wgsP1) && ccalc.checkPointValid(wgsP1)) {
+                let db = ccalc.distanceAndBearing(wgsP1, wgsP2);
                 $('#wgs-distance').val(db.distance);
                 $('#wgs-angle').val(Math.round(db.bearing));
             }
@@ -165,7 +165,7 @@ $(() => {
         let angle = parseInt($('#wgs-angle').val(), 10);
         let distance = parseInt(this.value, 10);
         try {
-            let p2 = clib.projection(new cparse(wgs84p1String), distance, angle); 
+            let p2 = ccalc.projection(new cparse(wgs84p1String), distance, angle); 
             let out = fcoord(p2.latitude, p2.longitude).format('XD m', fcOptions);
             $('#wgsp2').val(out);
     
@@ -179,7 +179,7 @@ $(() => {
         let angle = parseInt(this.value, 10);
         let distance = parseInt($('#wgs-distance').val(), 10);
         try {
-            let p2 = clib.projection(new cparse(wgs84p1String), distance, angle); 
+            let p2 = ccalc.projection(new cparse(wgs84p1String), distance, angle); 
             let out = fcoord(p2.latitude, p2.longitude).format('XD m', fcOptions);
             $('#wgsp2').val(out);
     
