@@ -15,14 +15,14 @@ let p1 = {
 
 // TODO: spacing in coords should be aligned with converter options
 let p1Swiss1903 = '677251 219658';
-let p1WGS84_ddmmss = 'N47 7 24.24 E8 27 24.12';
+let p1WGS84_ddmmss = 'N47 7 24.240 E8 27 24.120';
 let p1WGS84_ddmmddd = 'N47 7.404 E8 27.402';
+let p1WGS84_dd = 'N47.123400 E8.456700';
 
-let p2 = {
-    latitude: 47.1235,
-    longitude: 8.4568
-};
 
+let trimSpaces = function(str) {
+    return str.replace(/\s\s+/g, ' ');
+}
 
 describe('Constructor', function() {
     it(' leads to standard format', function() {
@@ -47,15 +47,71 @@ describe('Set and get of format type', function() {
 });
 
 
+describe('Conversion type "WGS84 dd"', function() {
+    it('converts a string to a point', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.WGS84_dd);
+        p = cc.asPoint(p1WGS84_ddmmddd);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+    });
+    it('converts a point to a string', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.WGS84_dd);
+        expect(trimSpaces(cc.asString(p1))).to.equal(p1WGS84_dd);
+    });
+});
+
 describe('Conversion type "WGS84 dd mm.ddd"', function() {
-    it(' changes and returns the correct type', function() {
+    it('converts a string to a point', function() {
         let cc = new Cc();
         let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_ddmmddd);
         p = cc.asPoint(p1WGS84_ddmmddd);
-        expect(p.latitude).to.equal(p1.latitude);
-        expect(p.longitude).to.equal(p1.longitude);
-        expect(cc.asString(p1)).to.equal(p1WGS84_ddmmddd);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+    });
+    it('converts a point to a string', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.WGS84_ddmmddd);
+        expect(trimSpaces(cc.asString(p1))).to.equal(p1WGS84_ddmmddd);
+    });
+});
+
+describe('Conversion type "WGS84 dd mm ss"', function() {
+    it('converts a string to a point', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.WGS84_ddmmss);
+        p = cc.asPoint(p1WGS84_ddmmss);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+    });
+    it('converts a point to a string', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.WGS84_ddmmss);
+        expect(trimSpaces(cc.asString(p1))).to.equal(p1WGS84_ddmmss);
+    });
+});
+
+describe('Conversion type "Swissgrid 1903"', function() {
+    it('converts a string to a point', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.Swissgrid1903);
+        p = cc.asPoint(p1Swiss1903);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+    });
+    it('converts a point to a string', function() {
+        let cc = new Cc();
+        let format = cc.getFormat();
+        cc.setFormat(CCFormats.Swissgrid1903);
+        expect(trimSpaces(cc.asString(p1))).to.equal(p1Swiss1903);
     });
 });
 
