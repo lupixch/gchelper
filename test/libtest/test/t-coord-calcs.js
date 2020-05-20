@@ -18,6 +18,56 @@ let p2 = {
 };
 
 
+describe('distanceIsValid()', function() {
+    it('actually accepts all kind of distances', function() {
+        expect(cc.distanceIsValid(0)).to.be.true;
+        expect(cc.distanceIsValid(5000)).to.be.true;
+        expect(cc.distanceIsValid(-4711)).to.be.true;
+    });
+});
+
+describe('bearingIsValid()', function() {
+    it('accepts valid bearings', function() {
+        expect(cc.bearingIsValid(0)).to.be.true;
+        expect(cc.bearingIsValid(123)).to.be.true;
+        expect(cc.bearingIsValid(360)).to.be.true;
+    });
+    it('rejects invalid bearings', function() {
+        expect(cc.bearingIsValid(-1)).to.be.false;
+        expect(cc.bearingIsValid(361)).to.be.false;
+    });
+});
+
+
+
+describe('pointIsValid()', function() {
+    it('rejects an undefined point', function() {
+        expect(cc.pointIsValid()).to.be.false;
+    });
+    it('rejects a point with no latitude', function() {
+        expect(cc.pointIsValid({longitude:0})).to.be.false;
+    });
+    it('rejects a point with no longitude', function() {
+        expect(cc.pointIsValid({latitude:0})).to.be.false;
+    });
+    it('rejects a point with invalid latitude', function() {
+        expect(cc.pointIsValid({latitude: 91,longitude: 0})).to.be.false;
+        expect(cc.pointIsValid({latitude: -91,longitude: 0})).to.be.false;
+    });
+    it('rejects a point with invalid longitude', function() {
+        expect(cc.pointIsValid({latitude: 0, longitude: 181})).to.be.false;
+        expect(cc.pointIsValid({latitude: 0, longitude: -181})).to.be.false;
+    });
+    it('accepts points with valid and limit values', function() {
+        expect(cc.pointIsValid({latitude: 0, longitude: 0})).to.be.true;
+        expect(cc.pointIsValid({latitude: 47, longitude: 12})).to.be.true;
+        expect(cc.pointIsValid({latitude: 90, longitude: 180})).to.be.true;
+        expect(cc.pointIsValid({latitude: -90, longitude: -180})).to.be.true;
+        expect(cc.pointIsValid({latitude: 90, longitude: -180})).to.be.true;
+        expect(cc.pointIsValid({latitude: -90, longitude: 180})).to.be.true;
+    });
+});
+
 describe('distance()', function() {
     it('should return 0 for 2 equal points', function() {
         expect(cc.distance(p1, p1)).to.equal(0);
@@ -47,8 +97,6 @@ describe('distanceAndBearing()', function() {
 describe('projection()', function() {
     it('with zero distance and angle should return same point', function() {
         let p = cc.projection(p1, 0, 0); 
-        // console.log(p);
-        // console.log(p1);
         expect(p.latitude.toFixed(5)).to.equal(p1.latitude.toFixed(5));
         expect(p.longitude.toFixed(5)).to.equal(p1.longitude.toFixed(5));
     });
@@ -57,9 +105,11 @@ describe('projection()', function() {
 describe('projection()', function() {
     it('should return correct new point', function() {
         let p = cc.projection(p1, 13, 34); 
-        // console.log(p1);
-        // console.log(p);
-        // console.log(p2);
+        expect(p.latitude.toFixed(5)).to.equal(p2.latitude.toFixed(5));
+        expect(p.longitude.toFixed(5)).to.equal(p2.longitude.toFixed(5));
+    });
+    it('should return correct new point with negative distance', function() {
+        let p = cc.projection(p1, -13, 34 + 180); 
         expect(p.latitude.toFixed(5)).to.equal(p2.latitude.toFixed(5));
         expect(p.longitude.toFixed(5)).to.equal(p2.longitude.toFixed(5));
     });

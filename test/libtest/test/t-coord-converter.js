@@ -50,7 +50,6 @@ describe('Set and get of format type', function() {
 describe('Conversion type "WGS84 dd"', function() {
     it('converts a string to a point', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_dd);
         p = cc.asPoint(p1WGS84_ddmmddd);
         expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
@@ -58,7 +57,6 @@ describe('Conversion type "WGS84 dd"', function() {
     });
     it('converts a point to a string', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_dd);
         expect(trimSpaces(cc.asString(p1))).to.equal(p1WGS84_dd);
     });
@@ -67,7 +65,6 @@ describe('Conversion type "WGS84 dd"', function() {
 describe('Conversion type "WGS84 dd mm.ddd"', function() {
     it('converts a string to a point', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_ddmmddd);
         p = cc.asPoint(p1WGS84_ddmmddd);
         expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
@@ -75,7 +72,6 @@ describe('Conversion type "WGS84 dd mm.ddd"', function() {
     });
     it('converts a point to a string', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_ddmmddd);
         expect(trimSpaces(cc.asString(p1))).to.equal(p1WGS84_ddmmddd);
     });
@@ -84,7 +80,6 @@ describe('Conversion type "WGS84 dd mm.ddd"', function() {
 describe('Conversion type "WGS84 dd mm ss"', function() {
     it('converts a string to a point', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_ddmmss);
         p = cc.asPoint(p1WGS84_ddmmss);
         expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
@@ -92,7 +87,6 @@ describe('Conversion type "WGS84 dd mm ss"', function() {
     });
     it('converts a point to a string', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.WGS84_ddmmss);
         expect(trimSpaces(cc.asString(p1))).to.equal(p1WGS84_ddmmss);
     });
@@ -101,7 +95,6 @@ describe('Conversion type "WGS84 dd mm ss"', function() {
 describe('Conversion type "Swissgrid 1903"', function() {
     it('converts a string to a point', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.Swissgrid1903);
         p = cc.asPoint(p1Swiss1903);
         expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
@@ -109,9 +102,43 @@ describe('Conversion type "Swissgrid 1903"', function() {
     });
     it('converts a point to a string', function() {
         let cc = new Cc();
-        let format = cc.getFormat();
         cc.setFormat(CCFormats.Swissgrid1903);
         expect(trimSpaces(cc.asString(p1))).to.equal(p1Swiss1903);
     });
 });
 
+describe('Conversion chain"', function() {
+    it('changes of format works correct for a chain of conversion', function() {
+        let cc = new Cc();
+        cc.setFormat(CCFormats.WGS84_dd);
+        let str = cc.asString(p1);
+        let p = cc.asPoint(str);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+
+        cc.setFormat(CCFormats.WGS84_ddmmss);
+        str = cc.asString(p);
+        p = cc.asPoint(str);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+
+        cc.setFormat(CCFormats.WGS84_ddmmddd);
+        str = cc.asString(p);
+        p = cc.asPoint(str);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+
+        cc.setFormat(CCFormats.Swissgrid1903);
+        str = cc.asString(p);
+        p = cc.asPoint(str);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+
+        cc.setFormat(CCFormats.WGS84_dd);
+        str = cc.asString(p);
+        p = cc.asPoint(str);
+        expect(p.latitude).to.be.closeTo(p1.latitude, 0.001);
+        expect(p.longitude).to.be.closeTo(p1.longitude, 0.001);
+
+    });
+});

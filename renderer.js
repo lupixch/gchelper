@@ -3,11 +3,12 @@ $(() => {
     const rotx = require('rot');
     const wv = require('./lib/word-value.js');
     const cy = require('cipherjs');
-    const swisstopo = require('./lib/swissgrid/wgs84_ch1903.js').Swisstopo;
-    const fcoord = require('formatcoords');
     const ccalc = require('./lib/coord-calcs.js');
-    const cparse = require('coordinate-parser');
+    const Cconv = require('./lib/coord-converter.js').CoordConverter;
+    const CCFormats = require('./lib/coord-converter.js').CCFormats;
 
+    let cconv = new Cconv();
+    
     const fcOptions = {
         latLonSeparator: '   ',
         decimalPlaces: 3
@@ -16,10 +17,7 @@ $(() => {
     let key = "";
     let inputText = "";
     let inputTextUpper = "";
-    let wgs84String = "";
-    let swissgridString = "";
-    let wgs84p1String = "";
-    let wgs84p2String = "";
+    let p1, p2, p3, p4;
 
     $('#btnTobase64').click(function() {
         let txt = $('#base64encode-output').text();
@@ -29,28 +27,6 @@ $(() => {
     $('#btnFrombase64').click(function() {
         let txt = $('#base64decode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
-    });
-
-    $('#swissgrid').bind('input propertychange', function() {
-        swissgridString = this.value;
-        let swissArray = swissgridString.split(/\s+/);
-        let y = parseInt(swissArray[0]);
-        let x = parseInt(swissArray[1]);
-        let wgs = swisstopo.CHtoWGS(y, x);
-        let out = fcoord(wgs[1], wgs[0]).format('XD m', fcOptions);
-        $('#wgs84').val(out);
-    });
-
-    $('#wgs84').bind('input propertychange', function() {
-        wgs84String = this.value;
-        try {
-            let wgs = new cparse(wgs84String);
-            let x = swisstopo.WGStoCHx(wgs.latitude, wgs.longitude);
-            let y = swisstopo.WGStoCHy(wgs.latitude, wgs.longitude);
-            $('#swissgrid').val(Math.round(y) + '  ' + Math.round(x));
-        } catch {
-
-        }
     });
 
     $('#key-input').bind('input propertychange', function() {
@@ -130,63 +106,80 @@ $(() => {
         $('#word-output').text(values);
     })
 
-    $('#wgsp1').bind('input propertychange', function() {
-        wgs84p1String = this.value;
+    $('#p1').bind('input propertychange', function() {
+        $('#error-text').text('');
+        p1 = cconv.asPoint(this.value);
         try {
-            let wgsP1 = new cparse(wgs84p1String);
-            let wgsP2 = new cparse(wgs84p2String);
-            if (ccalc.checkPointValid(wgsP1) && ccalc.checkPointValid(wgsP1)) {
-                let db = ccalc.distanceAndBearing(wgsP1, wgsP2);
-                $('#wgs-distance').val(db.distance);
-                $('#wgs-angle').val(Math.round(db.bearing));
+            if (ccalc.pointIsValid(p2)) {
+                let db = ccalc.distanceAndBearing(p1, p2);
+                $('#distance').val(db.distance);
+                $('#bearing').val(Math.round(db.bearing));
             }
-        } catch {
-
+        } catch(e) {
+            $('#error-text').text(e.message);
         }
     })
 
-    $('#wgsp2').bind('input propertychange', function() {
-        wgs84p2String = this.value;
+    $('#p2').bind('input propertychange', function() {
+        $('#error-text').text('');
+        p2 = cconv.asPoint(this.value);
         try {
-            let wgsP1 = new cparse(wgs84p1String);
-            let wgsP2 = new cparse(wgs84p2String);
-            if (ccalc.checkPointValid(wgsP1) && ccalc.checkPointValid(wgsP1)) {
-                let db = ccalc.distanceAndBearing(wgsP1, wgsP2);
-                $('#wgs-distance').val(db.distance);
-                $('#wgs-angle').val(Math.round(db.bearing));
-            }
-        } catch {
-
+            let db = ccalc.distanceAndBearing(p1, p2);
+            $('#distance').val(db.distance);
+            $('#bearing').val(Math.round(db.bearing));
+        } catch(e) {
+            $('#error-text').text(e.message);
         }
     })
 
-    $('#wgs-distance').bind('input propertychange', function() {
-        wgs84p1String = $('#wgsp1').val();
-        let angle = parseInt($('#wgs-angle').val(), 10);
+    $('#distance').bind('input propertychange', function() {
+        $('#error-text').text('');
+        let bearing = parseInt($('#bearing').val(), 10);
         let distance = parseInt(this.value, 10);
         try {
-            let p2 = ccalc.projection(new cparse(wgs84p1String), distance, angle); 
-            let out = fcoord(p2.latitude, p2.longitude).format('XD m', fcOptions);
-            $('#wgsp2').val(out);
+            p2 = ccalc.projection(p1, distance, bearing); 
+            $('#p2').val(cconv.asString(p2));
     
-        } catch {
-
+        } catch(e) {
+            console.error(e);
+            $('#error-text').text(e.message);
         }
     })
 
-    $('#wgs-angle').bind('input propertychange', function() {
-        wgs84p1String = $('#wgsp1').val();
-        let angle = parseInt(this.value, 10);
-        let distance = parseInt($('#wgs-distance').val(), 10);
+    $('#bearing').bind('input propertychange', function() {
+        $('#error-text').text('');
+        let bearing = parseInt(this.value, 10);
+        let distance = parseInt($('#distance').val(), 10);
         try {
-            let p2 = ccalc.projection(new cparse(wgs84p1String), distance, angle); 
-            let out = fcoord(p2.latitude, p2.longitude).format('XD m', fcOptions);
-            $('#wgsp2').val(out);
+            p2 = ccalc.projection(p1, distance, bearing); 
+            $('#p2').val(cconv.asString(p2));
     
-        } catch {
-
+        } catch(e) {
+            $('#error-text').text(e.message);
         }
     })
+
+    $('input[type=radio][name=formatOptions]').change(function() {
+        if (this.value == 'swiss') {
+            cconv.setFormat(CCFormats.Swissgrid1903);
+        }
+        else if (this.value == 'mmddd') {
+            cconv.setFormat(CCFormats.WGS84_ddmmddd);
+        }
+        else if (this.value == 'ddmmss') {
+            cconv.setFormat(CCFormats.WGS84_ddmmss);
+        }
+        else if (this.value == 'dd') {
+            cconv.setFormat(CCFormats.WGS84_dd);
+        }
+        p1 = cconv.asPoint($('#p1').val());
+        p2 = cconv.asPoint($('#p2').val());
+
+        $('#p1').val(cconv.asString(p1));
+        $('#p2').val(cconv.asString(p2));
+ 
+
+    });
 
     $('#text-input').focus() // focus input box
 });
