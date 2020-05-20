@@ -3,7 +3,9 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs');
 
-require('electron-reload')(__dirname);
+require('electron-reload')(process.cwd(), {
+    electron: path.join(__dirname, 'node_modules', '.bin', 'electron.cmd')
+})
 
 let getAppVersionString = function() {
     return app.getVersion();
