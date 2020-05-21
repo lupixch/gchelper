@@ -109,12 +109,11 @@ $(() => {
     $('#p1').bind('input propertychange', function() {
         $('#error-text').text('');
         p1 = cconv.asPoint(this.value);
+        let bearing = parseInt($('#bearing').val(), 10) || 0;
+        let distance = parseInt(this.value, 10) || 0;
         try {
-            if (ccalc.pointIsValid(p2)) {
-                let db = ccalc.distanceAndBearing(p1, p2);
-                $('#distance').val(db.distance);
-                $('#bearing').val(Math.round(db.bearing));
-            }
+            p2 = ccalc.projection(p1, distance, bearing); 
+            $('#p2').val(cconv.asString(p2));
         } catch(e) {
             $('#error-text').text(e.message);
         }
@@ -122,6 +121,7 @@ $(() => {
 
     $('#p2').bind('input propertychange', function() {
         $('#error-text').text('');
+        p1 = cconv.asPoint($('#p1').val());
         p2 = cconv.asPoint(this.value);
         try {
             let db = ccalc.distanceAndBearing(p1, p2);
@@ -134,12 +134,12 @@ $(() => {
 
     $('#distance').bind('input propertychange', function() {
         $('#error-text').text('');
-        let bearing = parseInt($('#bearing').val(), 10);
-        let distance = parseInt(this.value, 10);
+        p1 = cconv.asPoint($('#p1').val());
+        let bearing = parseInt($('#bearing').val(), 10) || 0;
+        let distance = parseInt(this.value, 10) || 0;
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
             $('#p2').val(cconv.asString(p2));
-    
         } catch(e) {
             console.error(e);
             $('#error-text').text(e.message);
@@ -148,8 +148,9 @@ $(() => {
 
     $('#bearing').bind('input propertychange', function() {
         $('#error-text').text('');
-        let bearing = parseInt(this.value, 10);
-        let distance = parseInt($('#distance').val(), 10);
+        p1 = cconv.asPoint($('#p1').val());
+        let bearing = parseInt(this.value, 10) || 0;
+        let distance = parseInt($('#distance').val(), 10) || 0;
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
             $('#p2').val(cconv.asString(p2));
@@ -160,6 +161,9 @@ $(() => {
     })
 
     $('input[type=radio][name=formatOptions]').change(function() {
+        p1 = cconv.asPoint($('#p1').val());
+        p2 = cconv.asPoint($('#p2').val());
+
         if (this.value == 'swiss') {
             cconv.setFormat(CCFormats.Swissgrid1903);
         }
@@ -172,8 +176,6 @@ $(() => {
         else if (this.value == 'dd') {
             cconv.setFormat(CCFormats.WGS84_dd);
         }
-        p1 = cconv.asPoint($('#p1').val());
-        p2 = cconv.asPoint($('#p2').val());
 
         $('#p1').val(cconv.asString(p1));
         $('#p2').val(cconv.asString(p2));
