@@ -14,6 +14,15 @@ describe('wordValue()', function() {
     it('should return a correct value for a single word', function() {
       expect(wv.wordValue('apple')).to.equal(50);
     });
+    it('should return a correct value for a single word upper case', function() {
+      expect(wv.wordValue('APPLE')).to.equal(50);
+    });
+    it('should return a correct value using first/last character', function() {
+      expect(wv.wordValue('az')).to.equal(27);
+    });
+    it('should return a correct value for a single word with non letters', function() {
+      expect(wv.wordValue('ap23;.ö1ple')).to.equal(50);
+    });
     it('should return a correct value for a splitted word', function() {
       expect(wv.wordValue('app le')).to.equal(50);
     });

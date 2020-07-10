@@ -50,7 +50,7 @@
                 <a class="nav-link" id="keydecode-tab" data-toggle="tab" href="#keydecode" role="tab" aria-controls="keydecode" aria-selected="false">Keydecode</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="swisswgs-tab" data-toggle="tab" href="#swisswgs" role="tab" aria-controls="swisswgs" aria-selected="false">Swissgrid/WGS</a>
+                <a class="nav-link" id="swisswgs-tab" data-toggle="tab" href="#coord" role="tab" aria-controls="coord" aria-selected="false">Coord calcs</a>
             </li>
         </ul>
         <p></p>
@@ -170,47 +170,100 @@
                 </div>
             </div>
 
-            <!-- wgs84 / swissgrid -->
-            <div class="tab-pane fade" id="swisswgs" role="tabpanel" aria-labelledby="base-tab">
+
+            <!-- coord stuff -->
+            <div class="tab-pane fade" id="coord" role="tabpanel" aria-labelledby="base-tab">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p>
-                            Home: N47 28.911 E8 12.515 / 658034 259294
+                            Home: N47 29.607 E8 13.080 / 658731 260590
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h4 class="std-heading">WGS84</h4>
-                        <textarea rows="1" id="wgs84" class="form-control text-input" placeholder="WGS84"></textarea>
-                        <!-- <button class="btn-to-inp" id="btnFrombase64">&nbsp;&rarr;inp</button> -->
+                        <!-- Coord format -->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="formatOptions" id="btn_swiss" value="swiss">
+                            <label class="form-check-label" for="btn_swiss">Swissgrid</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" checked name="formatOptions" id="btn_mmddd" value="mmddd">
+                            <label class="form-check-label" for="btn_mmddd">d mm.ddd</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="formatOptions" id="btn_dmmss" value="ddmmss">
+                            <label class="form-check-label" for="btn_dmmss">d mm ss</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="formatOptions" id="btn_dd" value="dd">
+                            <label class="form-check-label" for="btn_dd">d.ddd</label>
+                        </div>
+                        <br />
+                        <br />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h4 class="std-heading">Swissgrid</h4>
-                        <textarea rows="1" id="swissgrid" class="form-control text-input" placeholder="Swissgrid"></textarea>
-                        <!-- <button class="btn-to-inp" id="btnTobase64">&nbsp;&rarr;inp</button> -->
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Base
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="p1" class="form-control text-input" placeholder="1. Point">N47 29.607 E8 13.080</textarea>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Bearing (&deg;)
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <textarea rows="1" id="bearing" class="form-control text-input" placeholder="Bearing"></textarea>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Distance (m)
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <textarea rows="1" id="distance" class="form-control text-input" placeholder="Distance"></textarea>
                     </div>
                 </div>
+                <div class="row" style="padding-top:2px">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Result
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="p2" class="form-control text-input" placeholder="2. Point"></textarea>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:20px">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        P3
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="p3" class="form-control text-input" placeholder="3. Point (not impl.)"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        P4
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="p4" class="form-control text-input" placeholder="4. Point (not impl.)"></textarea>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        Cross
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <textarea rows="1" id="cross" class="form-control text-input" placeholder="Crosspoint (not impl.)"></textarea>
+                    </div>
+
+                </div>
             </div>
-
-
-
         </div>
+        <!-- Footer -->
+        <footer id="error-text" class="page-footer fixed-bottom red" style="color:red; margin-left:10px">
+            <!-- <div id="error-text">
+            </div> -->
+        </footer>
+        <!-- Footer -->
     </div>
 
-    <div id="container1" class="container-fluid">
-
-        <!-- Input row 
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3 class="std-heading">Input</h3>
-        <textarea rows="2" id="text-input1" class="form-control text-input" placeholder="Enter text and see it hashed..."></textarea>
-      </div>
-    </div>
-    -->
-    </div>
 </body>
 
 </html>

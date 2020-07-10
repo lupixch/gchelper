@@ -20,7 +20,7 @@
     "coordinate-parser": "^1.0.2",
     "electron-reload": "^1.5.0",
     "formatcoords": "^1.1.3",
-    "geolib": "^3.0.4",
+    "geolib": "^3.2.0",
     "rot": "^0.1.0"
   }
 }
