@@ -1,9 +1,12 @@
 # GcHelper
 
 Simple [Electron](https://electron.atom.io) application that helps to
-solve [geocaching](https://www.geocaching.com)  puzzles by offering encoding/decoding and conversion help for some typical used methods.
+solve [geocaching](https://www.geocaching.com) puzzles by offering encoding/decoding help for some typical used methods as well as assistance for simple coordinate calculations. 
+
+Positions are shown on a map.
 
 The application has been developed for own usage. Error handling is moderate...  
+Comments are welcome.
 
 
 ## Getting started
@@ -45,8 +48,16 @@ Encoding and decoding of some ciphers with a key.
 ![screenshot](./assets/gchelper-screenshot-5.jpg)
 
 
-### Conversion WGS84 / Swissgrid
-Convert between WGS84 and Swissgrid coordinates.
+### Simple coordinate calculations and conversions
+- Calculations:
+  - Projection
+  - Distance and bearing between 2 points
+  - (not implemented yet) Crosspoint of 2 lines
+- Convert between WGS84 and Swissgrid coordinates
+  - WGS84 decimal
+  - WGS84 degrees, minutes, seconds
+  - WGS84 degrees, decimal minutes (standard geocaching format)
+  - Swissgrid 1901
 
-![screenshot](./assets/gchelper-screenshot-6.jpg)
+![screenshot](./assets/gchelper-screenshot-coords.jpg)
 

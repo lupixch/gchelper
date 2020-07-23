@@ -30,3 +30,9 @@ body,
     border: 0;
     background: #aaa;
 }
+
+#map {
+    min-height: 600px;
+    min-width: 600px;
+    height: 100%; width: 100%; margin: 0; padding: 0;
+}

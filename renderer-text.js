@@ -1,23 +1,15 @@
 $(() => {
     const crypto = require('crypto');
     const rotx = require('rot');
-    const wv = require('./lib/word-value.js');
     const cy = require('cipherjs');
-    const ccalc = require('./lib/coord-calcs.js');
-    const Cconv = require('./lib/coord-converter.js').CoordConverter;
-    const CCFormats = require('./lib/coord-converter.js').CCFormats;
 
-    let cconv = new Cconv();
-    
-    const fcOptions = {
-        latLonSeparator: '   ',
-        decimalPlaces: 3
-    };
+    const wv = require('./lib/word-value.js');
 
     let key = "";
     let inputText = "";
     let inputTextUpper = "";
-    let p1, p2, p3, p4;
+
+    $('#text-input').focus() // focus input box
 
     $('#btnTobase64').click(function() {
         let txt = $('#base64encode-output').text();
@@ -106,82 +98,4 @@ $(() => {
         $('#word-output').text(values);
     })
 
-    $('#p1').bind('input propertychange', function() {
-        $('#error-text').text('');
-        p1 = cconv.asPoint(this.value);
-        let bearing = parseInt($('#bearing').val(), 10) || 0;
-        let distance = parseInt(this.value, 10) || 0;
-        try {
-            p2 = ccalc.projection(p1, distance, bearing); 
-            $('#p2').val(cconv.asString(p2));
-        } catch(e) {
-            $('#error-text').text(e.message);
-        }
-    })
-
-    $('#p2').bind('input propertychange', function() {
-        $('#error-text').text('');
-        p1 = cconv.asPoint($('#p1').val());
-        p2 = cconv.asPoint(this.value);
-        try {
-            let db = ccalc.distanceAndBearing(p1, p2);
-            $('#distance').val(db.distance);
-            $('#bearing').val(Math.round(db.bearing));
-        } catch(e) {
-            $('#error-text').text(e.message);
-        }
-    })
-
-    $('#distance').bind('input propertychange', function() {
-        $('#error-text').text('');
-        p1 = cconv.asPoint($('#p1').val());
-        let bearing = parseInt($('#bearing').val(), 10) || 0;
-        let distance = parseInt(this.value, 10) || 0;
-        try {
-            p2 = ccalc.projection(p1, distance, bearing); 
-            $('#p2').val(cconv.asString(p2));
-        } catch(e) {
-            console.error(e);
-            $('#error-text').text(e.message);
-        }
-    })
-
-    $('#bearing').bind('input propertychange', function() {
-        $('#error-text').text('');
-        p1 = cconv.asPoint($('#p1').val());
-        let bearing = parseInt(this.value, 10) || 0;
-        let distance = parseInt($('#distance').val(), 10) || 0;
-        try {
-            p2 = ccalc.projection(p1, distance, bearing); 
-            $('#p2').val(cconv.asString(p2));
-    
-        } catch(e) {
-            $('#error-text').text(e.message);
-        }
-    })
-
-    $('input[type=radio][name=formatOptions]').change(function() {
-        p1 = cconv.asPoint($('#p1').val());
-        p2 = cconv.asPoint($('#p2').val());
-
-        if (this.value == 'swiss') {
-            cconv.setFormat(CCFormats.Swissgrid1903);
-        }
-        else if (this.value == 'mmddd') {
-            cconv.setFormat(CCFormats.WGS84_ddmmddd);
-        }
-        else if (this.value == 'ddmmss') {
-            cconv.setFormat(CCFormats.WGS84_ddmmss);
-        }
-        else if (this.value == 'dd') {
-            cconv.setFormat(CCFormats.WGS84_dd);
-        }
-
-        $('#p1').val(cconv.asString(p1));
-        $('#p2').val(cconv.asString(p2));
- 
-
-    });
-
-    $('#text-input').focus() // focus input box
 });

@@ -7,6 +7,8 @@
     <title>GC Helper</title>
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="Stylesheet" href="styles.css">
 
@@ -17,7 +19,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="./renderer.js" charset="utf-8"></script>
+    <!-- <script src="./renderer.js" charset="utf-8"></script> -->
 </head>
 
 <body>
@@ -50,7 +52,7 @@
                 <a class="nav-link" id="keydecode-tab" data-toggle="tab" href="#keydecode" role="tab" aria-controls="keydecode" aria-selected="false">Keydecode</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="swisswgs-tab" data-toggle="tab" href="#coord" role="tab" aria-controls="coord" aria-selected="false">Coord calcs</a>
+                <a class="nav-link" id="coords-tab" data-toggle="tab" href="#coord" role="tab" aria-controls="coord" aria-selected="false">Coord calcs</a>
             </li>
         </ul>
         <p></p>
@@ -175,13 +177,6 @@
             <div class="tab-pane fade" id="coord" role="tabpanel" aria-labelledby="base-tab">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p>
-                            Home: N47 29.607 E8 13.080 / 658731 260590
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <!-- Coord format -->
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="formatOptions" id="btn_swiss" value="swiss">
@@ -205,10 +200,10 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        Base
+                        <span style="color:blue;">P1 Base</span>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <textarea rows="1" id="p1" class="form-control text-input" placeholder="1. Point">N47 29.607 E8 13.080</textarea>
+                        <textarea rows="1" id="p1" class="form-control text-input" placeholder="1. Point"></textarea>
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                         Bearing (&deg;)
@@ -225,7 +220,7 @@
                 </div>
                 <div class="row" style="padding-top:2px">
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        Result
+                        <span style="color:green">P2 Result</span>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <textarea rows="1" id="p2" class="form-control text-input" placeholder="2. Point"></textarea>
@@ -254,6 +249,12 @@
                     </div>
 
                 </div>
+                <div id=map>xxxx<br /><br /><br /><br /></div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        P4
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Footer -->
@@ -263,6 +264,9 @@
         </footer>
         <!-- Footer -->
     </div>
+    <!-- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script> -->
+    <script src="./renderer-text.js" charset="utf-8"></script>
+    <script src="./renderer-coords.js" charset="utf-8"></script>
 
 </body>
 
