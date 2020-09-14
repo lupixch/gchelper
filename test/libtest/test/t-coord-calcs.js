@@ -12,6 +12,26 @@ let p1 = {
     longitude: 8.456700
 };
 
+let p1north = {
+    latitude: 48.123400,
+    longitude: 8.456700
+};
+
+let p1east = {
+    latitude: 47.123400,
+    longitude: 9.456700
+};
+
+let p1south = {
+    latitude: 46.123400,
+    longitude: 8.456700
+};
+
+let p1west = {
+    latitude: 47.123400,
+    longitude: 7.456700
+};
+
 let p2 = {
     latitude: 47.1235,
     longitude: 8.4568
@@ -79,7 +99,19 @@ describe('distance()', function() {
 
 describe('bearing()', function() {
     it('should return 0 for 2 equal points', function() {
-        expect(cc.distance(p1, p1)).to.equal(0);
+        expect(cc.bearing(p1, p1)).to.equal(0);
+    });
+    it('should return 0 for a north point', function() {
+        expect(cc.bearing(p1, p1north)).to.equal(0);
+    });
+    it('should return 90 for a east point', function() {
+        expect(cc.bearing(p1, p1east)).to.equal(90);
+    });
+    it('should return 180 for a south point', function() {
+        expect(cc.bearing(p1, p1south)).to.equal(180);
+    });
+    it('should return 2700 for a west point', function() {
+        expect(cc.bearing(p1, p1west)).to.equal(270);
     });
 });
 

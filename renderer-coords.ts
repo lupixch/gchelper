@@ -18,7 +18,7 @@ $(() => {
     let p2 = ccalc.projection(p1, distance, bearing); 
     let p3, p4;
 
-    let map;
+    let map: any;
     let zoom = 15;
     let p1RaisesEvent = false;
     let p2RaisesEvent = false;
@@ -69,7 +69,7 @@ $(() => {
     });
 
     // Called by user code
-    onP1Changed = () => {
+    let onP1Changed = () : void => {
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
         } catch(e) {
@@ -79,7 +79,7 @@ $(() => {
     }
 
     // Called by user code
-    onP2Changed = () => {
+    let onP2Changed = () : void => {
         try {
             let db = ccalc.distanceAndBearing(p1, p2);
             distance =db.distance;
@@ -91,7 +91,7 @@ $(() => {
     }
 
     // Called by user code
-    onDistanceChanged = () => {
+    let onDistanceChanged = () : void => {
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
         } catch(e) {
@@ -102,7 +102,7 @@ $(() => {
     }
 
     // Called by user code
-    onBearingChanged = () => {
+    let onBearingChanged = () : void => {
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
         } catch(e) {
@@ -134,60 +134,61 @@ $(() => {
     };
 
     // jQuery event
-    $('#p1').bind('input propertychange', function() {
+    $('#p1').on('input propertychange', function() {
         $('#error-text').text('');
-        p1 = cconv.asPoint(this.value);
+        p1 = cconv.asPoint($(this).val());
         p1RaisesEvent = true;
         onP1Changed();
     })
 
     // jQuery event
-    $('#p2').bind('input propertychange', function() {
+    $('#p2').on('input propertychange', function() {
         $('#error-text').text('');
-        p2 = cconv.asPoint(this.value);
+        p2 = cconv.asPoint($(this).val());
         p2RaisesEvent = true;
         onP2Changed();
     })
 
     // jQuery event
-    $('#distance').bind('input propertychange', function() {
+    $('#distance').on('input propertychange', function() {
         $('#error-text').text('');
-        distance = parseInt(this.value, 10) || 0;
+        distance = parseInt(""+$(this).val(), 10) || 0;
         distancesRaisesEvent = true;
         onDistanceChanged();
     })
 
     // jQuery event
-    $('#bearing').bind('input propertychange', function() {
+    $('#bearing').on('input propertychange', function() {
         $('#error-text').text('');
-        bearing = parseInt(this.value, 10) || 0;
+        bearing = parseInt(""+$(this).val(), 10) || 0;
         bearingRaisesEvent = true;
         onBearingChanged()
     })
 
     // jQuery event
-    $('input[type=radio][name=formatOptions]').change(function() {
-        if (this.value == 'swiss') {
+    $('input[type=radio][name=formatOptions]').on("change", function() {
+        let format : string = ""+$(this).val();
+        if (format == 'swiss') {
             cconv.setFormat(CCFormats.Swissgrid1903);
         }
-        else if (this.value == 'mmddd') {
+        else if (format == 'mmddd') {
             cconv.setFormat(CCFormats.WGS84_ddmmddd);
         }
-        else if (this.value == 'ddmmss') {
+        else if (format == 'ddmmss') {
             cconv.setFormat(CCFormats.WGS84_ddmmss);
         }
-        else if (this.value == 'dd') {
+        else if (format == 'dd') {
             cconv.setFormat(CCFormats.WGS84_dd);
         }
         updateMapAndFields();
     });
 
-    $('#btnP1Center').click(function() {
+    $('#btnP1Center').on("click", function() {
         let pos = markerP1.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
     });
 
-    $('#btnP2Center').click(function() {
+    $('#btnP2Center').on("click", function() {
         let pos = markerP2.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
     });

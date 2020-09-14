@@ -1,16 +1,14 @@
-let wordValue = function(word) {
+let wordValue = function(word: string) {
     let sum = 0;
     word.toUpperCase().split('').forEach(function(alphabet) {
         if (alphabet.search(/[A-Z]/i) != -1) {
             sum += alphabet.charCodeAt(0) - 64;
         }
     });
-    //console.log(sum); 
     return sum;
 };
 
-reducedSum = function(value) {
-//    return value < 10 ? value : value % 9;
+let reducedSum = function(value: number) {
     return value % 9;
 }
 

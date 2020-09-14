@@ -1,20 +1,32 @@
+/**
+ * Conversion functions for several coordinate formats.
+ */
+
 const swissgrid = require('./swissgrid/wgs84_ch1903.js').Swisstopo;
 const fcoord = require('formatcoords');
 const Cparse = require('coordinate-parser');
 
-const formats = {
-    WGS84_dd: 1,
-    WGS84_ddmmss: 2,
-    WGS84_ddmmddd: 3,
-    Swissgrid1903: 4
+import { Point } from './point';
+
+enum Formats {
+    WGS84_dd,
+    WGS84_ddmmss,
+    WGS84_ddmmddd,
+    Swissgrid1903
 };
 
+interface Options {
+    latLonSeparator: number;
+    decimalPlaces: number;
+}
 
 class CoordConverter {
+    format: Formats;
+    options: Options;
 
     
-    constructor(options) {
-        this.format = formats.WGS84_ddmmddd;
+    constructor(options: Options) {
+        this.format = Formats.WGS84_ddmmddd;
 
         const optionDefaults = {
             latLonSeparator: '   ',
@@ -23,16 +35,16 @@ class CoordConverter {
         this.options = Object.assign({}, optionDefaults, options);
     }
 
-    setFormat(format) {
+    setFormat(format: Formats) {
         this.format = format;
         return format;
     }
 
-    getFormat() {
+    getFormat(): Formats {
         return this.format;
     }
 
-    asPoint(coordstring) {
+    asPoint(coordstring: string): Point {
         // convert string to point
         let p = {
             latitude: 0,
@@ -42,16 +54,16 @@ class CoordConverter {
             return p;
         }
         switch(this.format) {
-            case formats.WGS84_dd:
-            case formats.WGS84_ddmmss:
-            case formats.WGS84_ddmmddd:
+            case Formats.WGS84_dd:
+            case Formats.WGS84_ddmmss:
+            case Formats.WGS84_ddmmddd:
                 // This formats can all be handled by the coordinate-parser lib
                 let position = new Cparse(coordstring);
                 p.latitude = position.getLatitude();
                 p.longitude = position.getLongitude();
                 break;
 
-            case formats.Swissgrid1903:
+            case Formats.Swissgrid1903:
                 let swissArray = coordstring.split(/\s+/);
                 let y = parseInt(swissArray[0]);
                 let x = parseInt(swissArray[1]);
@@ -67,7 +79,7 @@ class CoordConverter {
         return p;
     }
 
-    asString(point) {
+    asString(point: Point): string {
         if (!point) {
             point = {
                 latitude: 0,
@@ -77,7 +89,7 @@ class CoordConverter {
         // convert point to string
         let coordstring = "";
         switch(this.format) {
-            case formats.WGS84_dd:
+            case Formats.WGS84_dd:
                 // This conversion needs more precicion
                 let save = this.options.decimalPlaces;
                 this.options.decimalPlaces = 6;
@@ -85,18 +97,18 @@ class CoordConverter {
                 this.options.decimalPlaces = save;
                 break;
 
-                case formats.WGS84_ddmmss:
+                case Formats.WGS84_ddmmss:
                 coordstring = fcoord(point.latitude, point.longitude).format('XD M s', this.options);
                 break;
                 
-            case formats.WGS84_ddmmddd:
+            case Formats.WGS84_ddmmddd:
                 coordstring = fcoord(point.latitude, point.longitude).format('XD m', this.options);
                 break;
 
-            case formats.Swissgrid1903:
+            case Formats.Swissgrid1903:
                 let x = swissgrid.WGStoCHx(point.latitude, point.longitude);
                 let y = swissgrid.WGStoCHy(point.latitude, point.longitude);
-                coordstring = Math.round(y) + this.options.latLonSeparator + Math.round(x);
+                coordstring = "" + Math.round(y) + this.options.latLonSeparator + Math.round(x);
                 break;
 
             default:                
@@ -109,5 +121,5 @@ class CoordConverter {
 
 module.exports = {
     CoordConverter : CoordConverter,
-    CCFormats : formats
+    CCFormats : Formats
 };

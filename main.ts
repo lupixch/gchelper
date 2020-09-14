@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-const fs = require('fs');
 
 require('electron-reload')(process.cwd(), {
     electron: path.join(__dirname, 'node_modules', '.bin', 'electron.cmd')
@@ -11,12 +10,12 @@ let getAppVersionString = function() {
     return app.getVersion();
 }
 
-let window = null;
+let myWindow : any = null;
 
 // Wait until the app is ready
 app.once('ready', () => {
     // Create a new window
-    window = new BrowserWindow({
+    myWindow = new BrowserWindow({
         // Set the initial width
         width: 900,
         // Set the initial height
@@ -32,16 +31,16 @@ app.once('ready', () => {
     });
 
     // Load a URL in the window to the local index.html path
-    window.loadURL(url.format({
+    myWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
     }));
 
     // Show window when page is ready
-    window.once('ready-to-show', () => {
-        window.setTitle('GC Helper V' + getAppVersionString());
-        window.show();
+    myWindow.once('ready-to-show', () => {
+        myWindow.setTitle('GC Helper V' + getAppVersionString());
+        myWindow.show();
     });
 
     // window.webContents.openDevTools()

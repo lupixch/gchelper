@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "watch": true,
+        "allowJs": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "strict": true
+    }
+}

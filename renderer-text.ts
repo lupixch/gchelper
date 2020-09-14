@@ -5,24 +5,24 @@ $(() => {
 
     const wv = require('./lib/word-value.js');
 
-    let key = "";
-    let inputText = "";
-    let inputTextUpper = "";
+    let key: string = "";
+    let inputText: string = "";
+    let inputTextUpper: string = "";
 
-    $('#text-input').focus() // focus input box
+    $('#text-input').trigger("focus") // focus input box
 
-    $('#btnTobase64').click(function() {
+    $('#btnTobase64').on("lick", function() {
         let txt = $('#base64encode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
     });
 
-    $('#btnFrombase64').click(function() {
+    $('#btnFrombase64').on("lick", function() {
         let txt = $('#base64decode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
     });
 
-    $('#key-input').bind('input propertychange', function() {
-        key = this.value;
+    $('#key-input').on('input propertychange', function() {
+        key = "" + $(this).val();
 
         const Vigenere = cy.Vigenere;
         let vdec = Vigenere.decrypt(inputText, key);
@@ -39,8 +39,8 @@ $(() => {
         $('#substitutionEncript-output').text(senc);
     });
 
-    $('#text-input').bind('input propertychange', function() {
-        inputText = this.value;
+    $('#text-input').on('input propertychange', function() {
+        inputText = "" + $(this).val();
         inputTextUpper = inputText.toUpperCase();
 
         const Vigenere = cy.Vigenere;
@@ -75,14 +75,14 @@ $(() => {
         const sha512 = crypto.createHash('sha512').update(inputText, 'utf8').digest('hex');
         $('#sha512-output').text(sha512);
 
-        const base64encode = Buffer.from(this.value, 'utf8').toString('base64');
+        const base64encode = Buffer.from(inputText, 'utf8').toString('base64');
         $('#base64encode-output').text(base64encode);
-        const base64decode = Buffer.from(this.value, 'base64').toString('utf8');
+        const base64decode = Buffer.from(inputText, 'base64').toString('utf8');
         $('#base64decode-output').text(base64decode);
 
-        let words = this.value.split(" ");
+        let words = ("" + $(this).val()).split(" ");
         let values = "";
-        let sum = 0;
+        let sum: number = 0;
         const padVal = 20;
         for (var i = 0; i < words.length; i += 1) {
             let word = words[i];
