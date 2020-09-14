@@ -19,14 +19,15 @@ $(() => {
     let p3, p4;
 
     let map;
+    let zoom = 15;
     let p1RaisesEvent = false;
     let p2RaisesEvent = false;
     let distancesRaisesEvent = false;
     let bearingRaisesEvent = false
 
-    map = L.map('map').setView([47.493450, 8.218000], 13);
+    map = L.map('map').setView([p1.latitude, p1.longitude], zoom);
 
-    var greenIcon = new L.Icon({
+    var blueIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
@@ -34,7 +35,7 @@ $(() => {
         popupAnchor: [1, -34],
         shadowSize: [41, 41]
     });
-    var blueIcon = new L.Icon({
+    var greenIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
@@ -43,8 +44,8 @@ $(() => {
         shadowSize: [41, 41]
     });
 
-    let markerP1 = L.marker([p1.latitude, p1.longitude], {icon: greenIcon, draggable: true, title: 'P1'}).addTo(map);
-    let markerP2 = L.marker([p2.latitude, p2.longitude], {icon: blueIcon, draggable: true, title: 'P2'}).addTo(map);
+    let markerP1 = L.marker([p1.latitude, p1.longitude], {icon: blueIcon, draggable: true, title: 'P1'}).addTo(map);
+    let markerP2 = L.marker([p2.latitude, p2.longitude], {icon: greenIcon, draggable: true, title: 'P2'}).addTo(map);
  
     let latlngs = [
         [p1.latitude, p1.longitude],
@@ -61,7 +62,7 @@ $(() => {
     }).addTo(map);
 
     // Delay the sizing of the map. Not really sure, if this is the correct workaround for missing map tiles...
-    $('#coords-tab').focusin( () => {
+    $('#coords-tab').on ("focusin", () => {
         setTimeout( () => {
             map.invalidateSize(true); 
         }, 500);
@@ -180,6 +181,17 @@ $(() => {
         }
         updateMapAndFields();
     });
+
+    $('#btnP1Center').click(function() {
+        let pos = markerP1.getLatLng();
+        map.setView([pos.lat, pos.lng], zoom);
+    });
+
+    $('#btnP2Center').click(function() {
+        let pos = markerP2.getLatLng();
+        map.setView([pos.lat, pos.lng], zoom);
+    });
+
 
     // leaflet event
     markerP1.on('moveend', function() {
