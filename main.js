@@ -17,9 +17,9 @@ let window = null;
 app.once('ready', () => {
     // Create a new window
     window = new BrowserWindow({
-        // Set the initial width to 800px
-        width: 800,
-        // Set the initial height to 600px
+        // Set the initial width
+        width: 900,
+        // Set the initial height
         height: 1100,
         // Set the default background color of the window to match the CSS
         // background color of the page, this prevents any white flickering
