@@ -1,4 +1,4 @@
-let wordValue = function(word: string) {
+let wordValue = function(word: string) : number {
     let sum = 0;
     word.toUpperCase().split('').forEach(function(alphabet) {
         if (alphabet.search(/[A-Z]/i) != -1) {
@@ -8,7 +8,7 @@ let wordValue = function(word: string) {
     return sum;
 };
 
-let reducedSum = function(value: number) {
+let reducedSum = function(value: number) : number {
     return value % 9;
 }
 

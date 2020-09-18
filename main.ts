@@ -6,7 +6,7 @@ require('electron-reload')(process.cwd(), {
     electron: path.join(__dirname, 'node_modules', '.bin', 'electron.cmd')
 })
 
-let getAppVersionString = function() {
+let getAppVersionString = function() : string {
     return app.getVersion();
 }
 

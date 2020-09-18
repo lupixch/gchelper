@@ -1,29 +1,26 @@
+import { Point } from './lib/point';
+
 $(() => {
     const L = require('leaflet');
 
     const ccalc = require('./lib/coord-calcs.js');
     const Cconv = require('./lib/coord-converter.js').CoordConverter;
     const CCFormats = require('./lib/coord-converter.js').CCFormats;
-    
+
     let cconv = new Cconv();
     
-    const fcOptions = {
-        latLonSeparator: '   ',
-        decimalPlaces: 3
-    };
-
-    let bearing = 90;
-    let distance = 1000;
-    let p1 = { latitude: 47.493450, longitude: 8.218000};
-    let p2 = ccalc.projection(p1, distance, bearing); 
+    let bearing : number = 90;
+    let distance : number = 1000;
+    let p1 : Point = { latitude: 47.493450, longitude: 8.218000};
+    let p2 : Point = ccalc.projection(p1, distance, bearing); 
     let p3, p4;
 
     let map: any;
-    let zoom = 15;
-    let p1RaisesEvent = false;
-    let p2RaisesEvent = false;
-    let distancesRaisesEvent = false;
-    let bearingRaisesEvent = false
+    let zoom : number = 15;
+    let p1RaisesEvent : boolean = false;
+    let p2RaisesEvent : boolean = false;
+    let distancesRaisesEvent : boolean = false;
+    let bearingRaisesEvent : boolean = false
 
     map = L.map('map').setView([p1.latitude, p1.longitude], zoom);
 
@@ -115,7 +112,7 @@ $(() => {
 
     // Called by user code
     // Update the positions of map elements and values in input boxes.
-    let updateMapAndFields = () => {
+    let updateMapAndFields = () : void => {
         markerP1.setLatLng([p1.latitude, p1.longitude]);
         markerP2.setLatLng([p2.latitude, p2.longitude]);
         polyline.setLatLngs([[p1.latitude, p1.longitude],
@@ -134,7 +131,7 @@ $(() => {
     };
 
     // jQuery event
-    $('#p1').on('input propertychange', function() {
+    $('#p1').on('input propertychange', function() : void {
         $('#error-text').text('');
         p1 = cconv.asPoint($(this).val());
         p1RaisesEvent = true;
@@ -142,7 +139,7 @@ $(() => {
     })
 
     // jQuery event
-    $('#p2').on('input propertychange', function() {
+    $('#p2').on('input propertychange', function() : void {
         $('#error-text').text('');
         p2 = cconv.asPoint($(this).val());
         p2RaisesEvent = true;
@@ -150,7 +147,7 @@ $(() => {
     })
 
     // jQuery event
-    $('#distance').on('input propertychange', function() {
+    $('#distance').on('input propertychange', function() : void {
         $('#error-text').text('');
         distance = parseInt(""+$(this).val(), 10) || 0;
         distancesRaisesEvent = true;
@@ -158,7 +155,7 @@ $(() => {
     })
 
     // jQuery event
-    $('#bearing').on('input propertychange', function() {
+    $('#bearing').on('input propertychange', function() : void {
         $('#error-text').text('');
         bearing = parseInt(""+$(this).val(), 10) || 0;
         bearingRaisesEvent = true;
@@ -183,19 +180,19 @@ $(() => {
         updateMapAndFields();
     });
 
-    $('#btnP1Center').on("click", function() {
+    $('#btnP1Center').on("click", function() : void {
         let pos = markerP1.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
     });
 
-    $('#btnP2Center').on("click", function() {
+    $('#btnP2Center').on("click", function() : void {
         let pos = markerP2.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
     });
 
 
     // leaflet event
-    markerP1.on('moveend', function() {
+    markerP1.on('moveend', function() : void {
         let pos = markerP1.getLatLng();
         p1.latitude = pos.lat;
         p1.longitude = pos.lng;
@@ -203,7 +200,7 @@ $(() => {
     });
 
     // leaflet event
-    markerP2.on('moveend', function() {
+    markerP2.on('moveend', function() : void {
         let pos = markerP2.getLatLng();
         p2.latitude = pos.lat;
         p2.longitude = pos.lng;
