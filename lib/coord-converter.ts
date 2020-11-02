@@ -2,7 +2,7 @@
  * Conversion functions for several coordinate Format.
  */
 
-const swissgrid = require('./swissgrid/wgs84_ch1903.js').Swisstopo;
+const swissgrid = require('../../lib/swissgrid/wgs84_ch1903.js').Swisstopo;
 const fcoord = require('formatcoords');
 const Cparse = require('coordinate-parser');
 

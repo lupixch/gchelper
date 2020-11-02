@@ -23,7 +23,7 @@
             "type": "node",
             "request": "launch",
             "name": "Libtests",
-            "cwd": "${workspaceFolder}/test/libtest/"
+            "cwd": "${workspaceFolder}/test/libtest/",
             "program": "${workspaceFolder}/test/libtest/node_modules/grunt/bin/grunt",
             "args": [
                 // "${workspaceFolder}/test/libtest"
@@ -62,8 +62,8 @@
               "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
             },
             "runtimeArgs": [
-              "${workspaceRoot}/main.js",
-              "--remote-debugging-port=9222"
+              "${workspaceRoot}/dist/main.js",
+              "--remote-debugging-port=9223"
             ],
             "webRoot": "${workspaceRoot}"
           }

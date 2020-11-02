@@ -11,12 +11,12 @@ $(() => {
 
     $('#text-input').trigger("focus") // focus input box
 
-    $('#btnTobase64').on("lick", function() : void {
+    $('#btnTobase64').on("click", function() : void {
         let txt : string = $('#base64encode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
     });
 
-    $('#btnFrombase64').on("lick", function() : void {
+    $('#btnFrombase64').on("click", function() : void {
         let txt = $('#base64decode-output').text();
         $('#text-input').val(txt).trigger('propertychange');
     });

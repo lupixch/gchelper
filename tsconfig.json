@@ -4,6 +4,7 @@
         "allowJs": false,
         "removeComments": true,
         "sourceMap": true,
-        "strict": true
+        "strict": true,
+        "outDir": "./dist"
     }
 }
