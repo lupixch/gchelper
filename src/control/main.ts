@@ -32,7 +32,7 @@ app.once('ready', () => {
 
     // Load a URL in the window to the local index.html path
     myWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
+        pathname: path.join(__dirname, '../gui/index.html'),
         protocol: 'file:',
         slashes: true
     }));

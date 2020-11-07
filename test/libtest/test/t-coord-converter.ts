@@ -1,8 +1,8 @@
 const basedir = '../../..';
 const Cc = require(basedir + '/lib/coord-converter.js').CoordConverter;
 // const Format : Format = require(basedir + '/lib/coord-converter').Format;
-import { Format} from '../../../lib/coord-converter';
-import { Point } from '../../../lib/point';
+import { Format} from '../../../src/lib/coord-converter';
+import { Point } from '../../../src/lib/point';
 
 let chai = require('chai');
 let expect = chai.expect;

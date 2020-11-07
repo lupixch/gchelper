@@ -1,11 +1,11 @@
-import { Point } from './lib/point';
+import { Point } from '../lib/point';
 
 $(() => {
     const L = require('leaflet');
 
-    const ccalc = require('./lib/coord-calcs.js');
-    const Cconv = require('./lib/coord-converter.js').CoordConverter;
-    const CCFormats = require('./lib/coord-converter.js').CCFormats;
+    const ccalc = require('../lib/coord-calcs.js');
+    const Cconv = require('../lib/coord-converter.js').CoordConverter;
+    const CCFormats = require('../lib/coord-converter.js').CCFormats;
 
     let cconv = new Cconv();
     

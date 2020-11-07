@@ -1,6 +1,6 @@
 const basedir : string = '../../..';
 const cc = require(basedir + '/lib/coord-calcs.js');
-import { Point } from '../../../lib/point';
+import { Point } from '../../../src/lib/point';
 
 
 

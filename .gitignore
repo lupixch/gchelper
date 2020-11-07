@@ -1,5 +1,7 @@
 ./*.js
 ./lib/*.js
+./control/*.js
+dist/*
 *.map
 node_modules
 release-builds
