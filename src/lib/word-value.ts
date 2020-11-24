@@ -1,4 +1,4 @@
-let wordValue = function(word: string) : number {
+export function wordValue(word: string) : number {
     let sum = 0;
     word.toUpperCase().split('').forEach(function(alphabet) {
         if (alphabet.search(/[A-Z]/i) != -1) {
@@ -8,11 +8,6 @@ let wordValue = function(word: string) : number {
     return sum;
 };
 
-let reducedSum = function(value: number) : number {
+export function reducedSum(value: number) : number {
     return value % 9;
 }
-
-module.exports = {
-    wordValue : wordValue,
-    reducedSum : reducedSum
-};

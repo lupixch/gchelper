@@ -3,7 +3,7 @@ REM This script clears and sets up the dist directory.
 REM It copies all necessary files that are not copied by the typescript compiler.
 REM After running this script, a new build must be run to create the *.js files.
 
-rmdir dist /q /s
+rem rmdir dist /q /s
 mkdir dist
 mkdir dist\gui
 mkdir dist\img

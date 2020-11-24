@@ -6,17 +6,22 @@
   "repository": "gchelper",
   "main": "out/main.js",
   "scripts": {
-    "copyDist": "copyDist.cmd" ,
+    "copyDist": "copyDist.cmd",
     "build": "npm run copyDist && tsc ",
     "start": "node_modules\\electron\\dist\\electron.exe ./dist/control/main.js",
     "package-win": "electron-packager . gchelper --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"GC Helper\""
   },
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.2.14",
     "@types/leaflet": "^1.5.17",
+    "@types/mocha": "^8.0.4",
+    "chai": "^4.2.0",
     "electron": "^7.3.3",
     "electron-packager": "^15.1.0",
-    "electron-rebuild": "^1.11.0"
+    "electron-rebuild": "^1.11.0",
+    "mocha": "^8.2.1",
+    "ts-node": "^9.0.0"
   },
   "dependencies": {
     "@types/jquery": "^3.5.1",

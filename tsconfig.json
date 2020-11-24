@@ -1,13 +1,15 @@
 {
     "compilerOptions": {
-        "module": "ES6",
+        "moduleResolution": "node",
         "watch": true,
         "allowJs": false,
         "removeComments": true,
         "sourceMap": true,
         "strict": true,
         "outDir": "./dist",
+        "rootDir": "./src/"
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    // "include": ["src/**/*", "test/**/*"],
 
 }

@@ -2,18 +2,18 @@
  * Conversion functions for several coordinate Format.
  */
 
-const swissgrid = require('./swissgrid/wgs84_ch1903.js').Swisstopo;
-const fcoord = require('formatcoords');
-const Cparse = require('coordinate-parser');
-
 import { Point } from './point';
 
-export const enum Format {
-    WGS84_dd,
-    WGS84_ddmmss,
-    WGS84_ddmmddd,
-    Swissgrid1903
-};
+export class Format {
+    static readonly WGS84_dd = 1;
+    static readonly WGS84_ddmmss = 2;
+    static readonly WGS84_ddmmddd=  3;
+    static readonly Swissgrid1903 = 4;
+}
+
+const swissgrid = require('../lib/swissgrid/wgs84_ch1903.js').Swisstopo;
+const fcoord = require('formatcoords');
+const Cparse = require('coordinate-parser');
 
 interface Options {
     latLonSeparator: number;

@@ -1,9 +1,12 @@
+import * as wv from '../lib/word-value.js';
+
 $(() => {
     const crypto = require('crypto');
     const rotx = require('rot');
     const cy = require('cipherjs');
 
-    const wv = require('../lib/word-value.js');
+//    const wv = require('../lib/word-value.js');
+//    import * as wv from '../lib/word-value.js';
 
     let key: string = "";
     let inputText: string = "";

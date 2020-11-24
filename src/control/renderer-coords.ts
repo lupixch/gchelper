@@ -1,12 +1,15 @@
 import { Point } from '../lib/point';
+import { Format as CCFormats } from '../lib/coord-converter.js';
+export {};
 
+//module coords {
 $(() => {
     const L = require('leaflet');
 
     const ccalc = require('../lib/coord-calcs.js');
     const Cconv = require('../lib/coord-converter.js').CoordConverter;
-    const CCFormats = require('../lib/coord-converter.js').CCFormats;
-
+    // const CCFormat = require('../lib/coord-converter.js').Format;
+console.log("Formats: ", CCFormats);
     let cconv = new Cconv();
     
     let bearing : number = 90;
@@ -183,6 +186,7 @@ $(() => {
     $('#btnP1Center').on("click", function() : void {
         let pos = markerP1.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
+        console.log('hello');
     });
 
     $('#btnP2Center').on("click", function() : void {
@@ -210,3 +214,5 @@ $(() => {
     // Intial update of fields
     updateMapAndFields();
 });
+
+//}
