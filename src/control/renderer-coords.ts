@@ -1,15 +1,12 @@
 import { Point } from '../lib/point';
-import { Format as CCFormats } from '../lib/coord-converter.js';
-export {};
+import { CFormats } from '../lib/coord-converter';
+import * as L  from 'leaflet';
 
-//module coords {
+import  * as ccalc  from '../lib/coord-calcs';
+import { CoordConverter as Cconv } from '../lib/coord-converter';
+
 $(() => {
-    const L = require('leaflet');
 
-    const ccalc = require('../lib/coord-calcs.js');
-    const Cconv = require('../lib/coord-converter.js').CoordConverter;
-    // const CCFormat = require('../lib/coord-converter.js').Format;
-console.log("Formats: ", CCFormats);
     let cconv = new Cconv();
     
     let bearing : number = 90;
@@ -136,7 +133,7 @@ console.log("Formats: ", CCFormats);
     // jQuery event
     $('#p1').on('input propertychange', function() : void {
         $('#error-text').text('');
-        p1 = cconv.asPoint($(this).val());
+        p1 = cconv.asPoint(""+$(this).val());
         p1RaisesEvent = true;
         onP1Changed();
     })
@@ -144,7 +141,7 @@ console.log("Formats: ", CCFormats);
     // jQuery event
     $('#p2').on('input propertychange', function() : void {
         $('#error-text').text('');
-        p2 = cconv.asPoint($(this).val());
+        p2 = cconv.asPoint(""+$(this).val());
         p2RaisesEvent = true;
         onP2Changed();
     })
@@ -169,16 +166,16 @@ console.log("Formats: ", CCFormats);
     $('input[type=radio][name=formatOptions]').on("change", function() {
         let format : string = ""+$(this).val();
         if (format == 'swiss') {
-            cconv.setFormat(CCFormats.Swissgrid1903);
+            cconv.setFormat(CFormats.Swissgrid1903);
         }
         else if (format == 'mmddd') {
-            cconv.setFormat(CCFormats.WGS84_ddmmddd);
+            cconv.setFormat(CFormats.WGS84_ddmmddd);
         }
         else if (format == 'ddmmss') {
-            cconv.setFormat(CCFormats.WGS84_ddmmss);
+            cconv.setFormat(CFormats.WGS84_ddmmss);
         }
         else if (format == 'dd') {
-            cconv.setFormat(CCFormats.WGS84_dd);
+            cconv.setFormat(CFormats.WGS84_dd);
         }
         updateMapAndFields();
     });
@@ -214,5 +211,3 @@ console.log("Formats: ", CCFormats);
     // Intial update of fields
     updateMapAndFields();
 });
-
-//}

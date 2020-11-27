@@ -5,9 +5,6 @@ $(() => {
     const rotx = require('rot');
     const cy = require('cipherjs');
 
-//    const wv = require('../lib/word-value.js');
-//    import * as wv from '../lib/word-value.js';
-
     let key: string = "";
     let inputText: string = "";
     let inputTextUpper: string = "";
