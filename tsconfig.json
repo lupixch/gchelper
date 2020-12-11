@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "moduleResolution": "node",
-        "watch": true,
+        "watch": false,
         "allowJs": false,
         "removeComments": true,
         "sourceMap": true,

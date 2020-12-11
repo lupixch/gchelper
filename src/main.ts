@@ -32,7 +32,7 @@ app.once('ready', () => {
 
     // Load a URL in the window to the local index.html path
     myWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '../gui/index.html'),
+        pathname: path.join(__dirname, './ui/index.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -43,5 +43,5 @@ app.once('ready', () => {
         myWindow.show();
     });
 
-    myWindow.webContents.openDevTools()
+    // myWindow.webContents.openDevTools()
 });

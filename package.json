@@ -4,11 +4,11 @@
   "version": "1.4.1",
   "description": "Helper to solve GC mysteries",
   "repository": "gchelper",
-  "main": "out/main.js",
+  "main": "dist/main.js",
   "scripts": {
     "copyDist": "copyDist.cmd",
     "build": "npm run copyDist && tsc ",
-    "start": "node_modules\\electron\\dist\\electron.exe ./dist/control/main.js",
+    "start": "node_modules\\electron\\dist\\electron.exe dist/main.js",
     "package-win": "electron-packager . gchelper --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"GC Helper\""
   },
   "license": "ISC",
