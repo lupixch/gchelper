@@ -1,5 +1,4 @@
-const basedir : string = '../../../dist';
-const cc = require(basedir + '/lib/coord-calcs.js');
+import * as cc from '../../src/lib/coord-calcs';
 import { Point } from '../../src/lib/point';
 
 
@@ -63,15 +62,6 @@ describe('bearingIsValid()', function() {
 
 
 describe('pointIsValid()', function() {
-    it('rejects an undefined point', function() {
-        expect(cc.pointIsValid()).to.be.false;
-    });
-    it('rejects a point with no latitude', function() {
-        expect(cc.pointIsValid({longitude:0})).to.be.false;
-    });
-    it('rejects a point with no longitude', function() {
-        expect(cc.pointIsValid({latitude:0})).to.be.false;
-    });
     it('rejects a point with invalid latitude', function() {
         expect(cc.pointIsValid({latitude: 91,longitude: 0})).to.be.false;
         expect(cc.pointIsValid({latitude: -91,longitude: 0})).to.be.false;

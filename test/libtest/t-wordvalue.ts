@@ -1,5 +1,3 @@
-const basedir = '../../..';
-//const wv = require(basedir + '/lib/word-value.js');
 import  * as wv  from '../../src/lib/word-value';
 import 'chai';
 import 'mocha';

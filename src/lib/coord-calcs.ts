@@ -22,7 +22,7 @@ class CoordException {
     }
 }
 
-let pointIsValid = function (p: Point): boolean {
+export function pointIsValid (p: Point): boolean {
     if (p === undefined) return false;
     if (p.latitude === undefined) return false;
     if (p.longitude === undefined) return false;
@@ -33,12 +33,12 @@ let pointIsValid = function (p: Point): boolean {
     return true;
 }
 
-function distanceIsValid (distance: number): boolean {
+export function distanceIsValid (distance: number): boolean {
     // Actually there seems to be no invalid velue for distances.
     return true;
 }
 
-let bearingIsValid = function (bearing: number): boolean {
+export function bearingIsValid (bearing: number): boolean {
     if (bearing < 0) return false;
     if (bearing > 360) return false;
     return true;
