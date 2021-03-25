@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "watch": false,
+        "allowJs": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "strict": true,
+        "outDir": "./dist",
+        "rootDir": "./src/"
+    },
+    "include": ["src/**/*"],
+    // "include": ["src/**/*", "test/**/*"],
+
+}

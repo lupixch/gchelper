@@ -1,3 +1,9 @@
+./*.js
+./lib/*.js
+./control/*.js
+dist/*
+*.map
 node_modules
 release-builds
 /yarn-error.log
+/test/libtest/test/*.js

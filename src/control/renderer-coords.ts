@@ -1,29 +1,26 @@
-$(() => {
-    const L = require('leaflet');
+import { Point } from '../lib/point';
+import { CFormats } from '../lib/coord-converter';
+import * as L  from 'leaflet';
 
-    const ccalc = require('./lib/coord-calcs.js');
-    const Cconv = require('./lib/coord-converter.js').CoordConverter;
-    const CCFormats = require('./lib/coord-converter.js').CCFormats;
-    
+import  * as ccalc  from '../lib/coord-calcs';
+import { CoordConverter as Cconv } from '../lib/coord-converter';
+
+$(() => {
+
     let cconv = new Cconv();
     
-    const fcOptions = {
-        latLonSeparator: '   ',
-        decimalPlaces: 3
-    };
-
-    let bearing = 90;
-    let distance = 1000;
-    let p1 = { latitude: 47.493450, longitude: 8.218000};
-    let p2 = ccalc.projection(p1, distance, bearing); 
+    let bearing : number = 90;
+    let distance : number = 1000;
+    let p1 : Point = { latitude: 47.493450, longitude: 8.218000};
+    let p2 : Point = ccalc.projection(p1, distance, bearing); 
     let p3, p4;
 
-    let map;
-    let zoom = 15;
-    let p1RaisesEvent = false;
-    let p2RaisesEvent = false;
-    let distancesRaisesEvent = false;
-    let bearingRaisesEvent = false
+    let map: any;
+    let zoom : number = 15;
+    let p1RaisesEvent : boolean = false;
+    let p2RaisesEvent : boolean = false;
+    let distancesRaisesEvent : boolean = false;
+    let bearingRaisesEvent : boolean = false
 
     map = L.map('map').setView([p1.latitude, p1.longitude], zoom);
 
@@ -69,7 +66,7 @@ $(() => {
     });
 
     // Called by user code
-    onP1Changed = () => {
+    let onP1Changed = () : void => {
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
         } catch(e) {
@@ -79,7 +76,7 @@ $(() => {
     }
 
     // Called by user code
-    onP2Changed = () => {
+    let onP2Changed = () : void => {
         try {
             let db = ccalc.distanceAndBearing(p1, p2);
             distance =db.distance;
@@ -91,7 +88,7 @@ $(() => {
     }
 
     // Called by user code
-    onDistanceChanged = () => {
+    let onDistanceChanged = () : void => {
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
         } catch(e) {
@@ -102,7 +99,7 @@ $(() => {
     }
 
     // Called by user code
-    onBearingChanged = () => {
+    let onBearingChanged = () : void => {
         try {
             p2 = ccalc.projection(p1, distance, bearing); 
         } catch(e) {
@@ -115,7 +112,7 @@ $(() => {
 
     // Called by user code
     // Update the positions of map elements and values in input boxes.
-    let updateMapAndFields = () => {
+    let updateMapAndFields = () : void => {
         markerP1.setLatLng([p1.latitude, p1.longitude]);
         markerP2.setLatLng([p2.latitude, p2.longitude]);
         polyline.setLatLngs([[p1.latitude, p1.longitude],
@@ -134,67 +131,69 @@ $(() => {
     };
 
     // jQuery event
-    $('#p1').bind('input propertychange', function() {
+    $('#p1').on('input propertychange', function() : void {
         $('#error-text').text('');
-        p1 = cconv.asPoint(this.value);
+        p1 = cconv.asPoint(""+$(this).val());
         p1RaisesEvent = true;
         onP1Changed();
     })
 
     // jQuery event
-    $('#p2').bind('input propertychange', function() {
+    $('#p2').on('input propertychange', function() : void {
         $('#error-text').text('');
-        p2 = cconv.asPoint(this.value);
+        p2 = cconv.asPoint(""+$(this).val());
         p2RaisesEvent = true;
         onP2Changed();
     })
 
     // jQuery event
-    $('#distance').bind('input propertychange', function() {
+    $('#distance').on('input propertychange', function() : void {
         $('#error-text').text('');
-        distance = parseInt(this.value, 10) || 0;
+        distance = parseInt(""+$(this).val(), 10) || 0;
         distancesRaisesEvent = true;
         onDistanceChanged();
     })
 
     // jQuery event
-    $('#bearing').bind('input propertychange', function() {
+    $('#bearing').on('input propertychange', function() : void {
         $('#error-text').text('');
-        bearing = parseInt(this.value, 10) || 0;
+        bearing = parseInt(""+$(this).val(), 10) || 0;
         bearingRaisesEvent = true;
         onBearingChanged()
     })
 
     // jQuery event
-    $('input[type=radio][name=formatOptions]').change(function() {
-        if (this.value == 'swiss') {
-            cconv.setFormat(CCFormats.Swissgrid1903);
+    $('input[type=radio][name=formatOptions]').on("change", function() {
+        let format : string = ""+$(this).val();
+        if (format == 'swiss') {
+            cconv.setFormat(CFormats.Swissgrid1903);
         }
-        else if (this.value == 'mmddd') {
-            cconv.setFormat(CCFormats.WGS84_ddmmddd);
+        else if (format == 'mmddd') {
+            cconv.setFormat(CFormats.WGS84_ddmmddd);
         }
-        else if (this.value == 'ddmmss') {
-            cconv.setFormat(CCFormats.WGS84_ddmmss);
+        else if (format == 'ddmmss') {
+            cconv.setFormat(CFormats.WGS84_ddmmss);
         }
-        else if (this.value == 'dd') {
-            cconv.setFormat(CCFormats.WGS84_dd);
+        else if (format == 'dd') {
+            cconv.setFormat(CFormats.WGS84_dd);
         }
         updateMapAndFields();
     });
 
-    $('#btnP1Center').click(function() {
+    $('#btnP1Center').on("click", function() : void {
         let pos = markerP1.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
+        console.log('hello');
     });
 
-    $('#btnP2Center').click(function() {
+    $('#btnP2Center').on("click", function() : void {
         let pos = markerP2.getLatLng();
         map.setView([pos.lat, pos.lng], zoom);
     });
 
 
     // leaflet event
-    markerP1.on('moveend', function() {
+    markerP1.on('moveend', function() : void {
         let pos = markerP1.getLatLng();
         p1.latitude = pos.lat;
         p1.longitude = pos.lng;
@@ -202,7 +201,7 @@ $(() => {
     });
 
     // leaflet event
-    markerP2.on('moveend', function() {
+    markerP2.on('moveend', function() : void {
         let pos = markerP2.getLatLng();
         p2.latitude = pos.lat;
         p2.longitude = pos.lng;

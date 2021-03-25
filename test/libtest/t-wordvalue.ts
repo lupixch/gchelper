@@ -1,8 +1,6 @@
-const basedir = '../../..';
-const wv = require(basedir + '/lib/word-value.js');
+import  * as wv  from '../../src/lib/word-value';
+import * as chai from 'chai';// import 'mocha';
 
-
-let chai = require('chai');
 let expect = chai.expect;
 
 let assert = require('assert');

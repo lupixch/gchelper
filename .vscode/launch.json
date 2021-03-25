@@ -23,10 +23,10 @@
             "type": "node",
             "request": "launch",
             "name": "Libtests",
-            "cwd": "${workspaceFolder}/test/libtest/"
+            "cwd": "${workspaceFolder}/test/libtest/",
             "program": "${workspaceFolder}/test/libtest/node_modules/grunt/bin/grunt",
             "args": [
-                // "${workspaceFolder}/test/libtest"
+                "${workspaceFolder}/test/libtest"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         },
@@ -46,7 +46,7 @@
             }
         },
         {
-            "name": "Electron: Renderer",
+            "name": "INVALID Electron: Renderer",
             "type": "chrome",
             "request": "attach",
             "port": 9223,
@@ -62,8 +62,8 @@
               "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
             },
             "runtimeArgs": [
-              "${workspaceRoot}/main.js",
-              "--remote-debugging-port=9222"
+              "${workspaceRoot}/dist/main.js",
+              "--remote-debugging-port=9223"
             ],
             "webRoot": "${workspaceRoot}"
           }
@@ -73,7 +73,7 @@
             "name": "Electron: All",
             "configurations": [
                 "Electron: Main",
-                "Electron: Renderer",
+                "Debug Renderer Process",
             ]
         }
     ]
