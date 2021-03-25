@@ -118,8 +118,3 @@ export class CoordConverter {
     }
 };
 
-
-// module.exports = {
-//     CoordConverter : CoordConverter,
-//     // Format : Format
-// };

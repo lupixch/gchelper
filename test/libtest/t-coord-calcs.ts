@@ -1,9 +1,7 @@
 import * as cc from '../../src/lib/coord-calcs';
 import { Point } from '../../src/lib/point';
 
-
-
-let chai = require('chai');
+import * as chai from 'chai';
 let expect = chai.expect;
 
 let assert = require('assert');

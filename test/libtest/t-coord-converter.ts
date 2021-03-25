@@ -1,9 +1,8 @@
-const basedir = '../../..';
 import { CoordConverter as Cc } from '../../src/lib/coord-converter';
 import { CFormats } from '../../src/lib/coord-converter';
 import { Point } from '../../src/lib/point';
 
-let chai = require('chai');
+import * as chai from 'chai';
 let expect = chai.expect;
 
 let p1 : Point = {
