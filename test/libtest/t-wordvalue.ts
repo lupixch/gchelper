@@ -30,6 +30,9 @@ describe('reducedSum()', function() {
     it('should return the correct value for a 0', function() {
       expect(wv.reducedSum(0)).to.equal(0);
     });
+    it('should return the correct value for a 0', function() {
+      expect(wv.reducedSum(108)).to.equal(9);
+    });
      it('should return the correct value for a single digit', function() {
       expect(wv.reducedSum(7)).to.equal(7);
     });

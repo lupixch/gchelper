@@ -9,5 +9,12 @@ export function wordValue(word: string) : number {
 };
 
 export function reducedSum(value: number) : number {
-    return value % 9;
+    if (value == 0) {
+        return 0;
+    }
+    let sum = value % 9;
+    if (sum == 0) {
+        sum = 9;
+    }
+    return sum;
 }
