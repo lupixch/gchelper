@@ -21,6 +21,8 @@ $(() => {
     let p2RaisesEvent : boolean = false;
     let distancesRaisesEvent : boolean = false;
     let bearingRaisesEvent : boolean = false
+    let inputDelayTimer : any;
+    let inputDelayTime : number = 1000;
 
     map = L.map('map').setView([p1.latitude, p1.longitude], zoom);
 
@@ -65,48 +67,47 @@ $(() => {
         }, 500);
     });
 
+    let delayedHandler = (handler : Function) : void => {
+        clearTimeout(inputDelayTimer);
+        inputDelayTimer = setTimeout( ()=> {
+            try {
+                handler();
+            } catch(e) {
+                $('#error-text').text(e.message);
+            }
+            updateMapAndFields();
+        }, inputDelayTime);
+    }
+
     // Called by user code
     let onP1Changed = () : void => {
-        try {
+        delayedHandler(() => {
             p2 = ccalc.projection(p1, distance, bearing); 
-        } catch(e) {
-            $('#error-text').text(e.message);
-        }
-        updateMapAndFields();
+        });
     }
 
     // Called by user code
     let onP2Changed = () : void => {
-        try {
+        delayedHandler(() => {
             let db = ccalc.distanceAndBearing(p1, p2);
             distance =db.distance;
             bearing = Math.round(db.bearing);
-        } catch(e) {
-            $('#error-text').text(e.message);
-        }
-        updateMapAndFields();
+        });
     }
+
 
     // Called by user code
     let onDistanceChanged = () : void => {
-        try {
+        delayedHandler(() => {
             p2 = ccalc.projection(p1, distance, bearing); 
-        } catch(e) {
-            console.error(e);
-            $('#error-text').text(e.message);
-        }
-        updateMapAndFields();
+        });
     }
 
     // Called by user code
     let onBearingChanged = () : void => {
-        try {
+        delayedHandler(() => {
             p2 = ccalc.projection(p1, distance, bearing); 
-        } catch(e) {
-            console.error(e);
-            $('#error-text').text(e.message);
-        }
-        updateMapAndFields();
+        });
     }
 
 
