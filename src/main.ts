@@ -26,8 +26,9 @@ app.once('ready', () => {
         // Don't show the window until it's ready, this prevents any white flickering
         show: false,
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,        }
     });
 
     // Load a URL in the window to the local index.html path
