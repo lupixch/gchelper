@@ -21,7 +21,7 @@
     "electron": "^18.3.7",
     "electron-packager": "^15.1.0",
     "electron-rebuild": "^1.11.0",
-    "mocha": "^8.2.1",
+    "mocha": "^10.1.0",
     "ts-node": "^9.0.0"
   },
   "dependencies": {
