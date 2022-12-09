@@ -18,8 +18,8 @@
     "@types/leaflet": "^1.5.17",
     "@types/mocha": "^8.0.4",
     "chai": "^4.2.0",
-    "electron": "^18.3.7",
-    "electron-packager": "^15.1.0",
+    "electron": "^22.0.0",
+    "electron-packager": "^17.1.1",
     "electron-rebuild": "^1.11.0",
     "mocha": "^10.1.0",
     "ts-node": "^9.0.0"
