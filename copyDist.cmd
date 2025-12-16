@@ -11,3 +11,7 @@ xcopy /s /e /y src\ui dist\ui
 xcopy /s /e /y src\img dist\img
 xcopy /s /e /y src\lib\swissgrid dist\lib\swissgrid
 
+rmdir dist-test /q /s
+mkdir dist-test\src\lib\swissgrid
+xcopy /s /e /y src\lib\swissgrid dist-test\src\lib\swissgrid
+

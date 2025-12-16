@@ -72,8 +72,10 @@ $(() => {
         inputDelayTimer = setTimeout( ()=> {
             try {
                 handler();
-            } catch(e) {
-                $('#error-text').text(e.message);
+            } catch(e: unknown) {
+                if (e instanceof Error) {
+                    $('#error-text').text(e.message);
+                }
             }
             updateMapAndFields();
         }, inputDelayTime);

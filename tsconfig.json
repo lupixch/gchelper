@@ -1,15 +1,19 @@
 {
     "compilerOptions": {
         "moduleResolution": "node",
+        "module": "CommonJS",
+        "target": "ES2020",
         "watch": false,
         "allowJs": false,
         "removeComments": true,
         "sourceMap": true,
+        "esModuleInterop": true,
         "strict": true,
+        "skipLibCheck": true,
+        "useUnknownInCatchVariables": false,
         "outDir": "./dist",
-        "rootDir": "./src/"
+        "rootDir": "./src"
     },
-    "include": ["src/**/*"],
-    // "include": ["src/**/*", "test/**/*"],
-
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
 }

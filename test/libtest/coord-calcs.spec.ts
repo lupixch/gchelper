@@ -1,5 +1,5 @@
-import * as cc from '../../src/lib/coord-calcs';
 import { Point } from '../../src/lib/point';
+import * as cc   from '../../src/lib/coord-calcs';
 
 import * as chai from 'chai';
 let expect = chai.expect;

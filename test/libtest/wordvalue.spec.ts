@@ -27,10 +27,13 @@ describe('wordValue()', function() {
 });
 
 describe('reducedSum()', function() {
-    it('should return the correct value for a 0', function() {
+    it('should return the correct value for 0', function() {
       expect(wv.reducedSum(0)).to.equal(0);
     });
-    it('should return the correct value for a 9', function() {
+    it('should return the correct value for 9', function() {
+      expect(wv.reducedSum(9)).to.equal(9);
+    });
+    it('should return the correct value for a multiple of 9', function() {
       expect(wv.reducedSum(108)).to.equal(9);
     });
      it('should return the correct value for a single digit', function() {

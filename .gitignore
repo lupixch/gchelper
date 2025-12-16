@@ -2,6 +2,7 @@
 ./lib/*.js
 ./control/*.js
 dist/*
+dist-test/*
 *.map
 node_modules
 release-builds
