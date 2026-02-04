@@ -8,47 +8,51 @@ Positions are shown on a map.
 The application has been developed for own usage. Error handling is moderate...  
 Comments are welcome.
 
-
 ## Getting started
 
-- Install [Node LTS](https://nodejs.org)
 - Clone this repository
 - `cd gchelper`
 - `npm install` to install the application's dependencies
+- `npm run build` to compile
+- Momentary workaround because of compile problems with cipherjs:
+  Add missing comment "//" in front of line 1 of `node_modules/cipherjs/index.js`:
+  `//#!/usr/bin/env node`
 - `npm start` to start the application
 
 ## Functionality
 
 ### ROT encoding
+
 Show all 26 ROT encodings of an input text. 
 
 ![screenshot](./assets/gchelper-screenshot-1.jpg)
 
 ### Hashes
+
 Display several hashes for an input text.
 
 ![screenshot](./assets/gchelper-screenshot-2.jpg)
 
-
 ### Word values
+
 Calculate the word values of an input text.
 
 ![screenshot](./assets/gchelper-screenshot-3.jpg)
 
-
 ### base64 encoding and decoding
+
 base64 encoding and (possible) decoding of an input text.
 
 ![screenshot](./assets/gchelper-screenshot-4.jpg)
 
-
 ### Ciphers using a key
+
 Encoding and decoding of some ciphers with a key.
 
 ![screenshot](./assets/gchelper-screenshot-5.jpg)
 
-
 ### Simple coordinate calculations and conversions
+
 - Calculations:
   - Projection
   - Distance and bearing between 2 points
@@ -60,4 +64,3 @@ Encoding and decoding of some ciphers with a key.
   - Swissgrid 1901
 
 ![screenshot](./assets/gchelper-screenshot-coords.jpg)
-
