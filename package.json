@@ -22,7 +22,7 @@
     "@types/mocha": "^8.0.4",
     "@types/node": "^25.0.2",
     "chai": "^4.2.0",
-    "electron": "^39.8.4",
+    "electron": "^39.8.5",
     "electron-mocha": "^13.1.0",
     "electron-packager": "^17.1.2",
     "electron-rebuild": "^3.2.9",
